@@ -20,6 +20,7 @@
 		F03C2340243DC6470064C4A4 /* SpaceUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03C233F243DC6470064C4A4 /* SpaceUITests.swift */; };
 		F03C2350243DC7630064C4A4 /* LogIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03C234F243DC7630064C4A4 /* LogIn.swift */; };
 		F03C2352243DD80B0064C4A4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F03C2351243DD80B0064C4A4 /* GoogleService-Info.plist */; };
+		F047F8B424436D2700E4E2DB /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F047F8B324436D2700E4E2DB /* RoundButton.swift */; };
 		F07AC31024431DE3004CFA4D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07AC30F24431DE3004CFA4D /* HomeViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -66,6 +67,7 @@
 		F03C234D243DC6520064C4A4 /* Space.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Space.entitlements; sourceTree = "<group>"; };
 		F03C234F243DC7630064C4A4 /* LogIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogIn.swift; sourceTree = "<group>"; };
 		F03C2351243DD80B0064C4A4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F047F8B324436D2700E4E2DB /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		F07AC30F24431DE3004CFA4D /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		F23F35D74CBD546F64C07072 /* Pods-Space-SpaceUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Space-SpaceUITests.release.xcconfig"; path = "Target Support Files/Pods-Space-SpaceUITests/Pods-Space-SpaceUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -183,6 +185,7 @@
 			children = (
 				F03C234F243DC7630064C4A4 /* LogIn.swift */,
 				F07AC30F24431DE3004CFA4D /* HomeViewController.swift */,
+				F047F8B324436D2700E4E2DB /* RoundButton.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -463,6 +466,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F047F8B424436D2700E4E2DB /* RoundButton.swift in Sources */,
 				F07AC31024431DE3004CFA4D /* HomeViewController.swift in Sources */,
 				F03C231B243DC63F0064C4A4 /* AppDelegate.swift in Sources */,
 				F03C2325243DC63F0064C4A4 /* Space.xcdatamodeld in Sources */,
