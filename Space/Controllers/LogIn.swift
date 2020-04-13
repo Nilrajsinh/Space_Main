@@ -50,6 +50,7 @@ class LogIn: UIViewController,GIDSignInDelegate {
             if error != nil {
                 print("Error")
             }
+             appDelegate.loginUserID = user?.user.uid ?? ""
             self.performSegue(withIdentifier: "Home", sender: nil)
         }
     }
