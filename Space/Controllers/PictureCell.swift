@@ -11,6 +11,11 @@ import UIKit
 class PictureCell: UICollectionViewCell {
     
     
-    @IBOutlet weak var PictureCell: UIImageView!
+    @IBOutlet weak var Picture: UIImageView!
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.Picture.image = nil
+        
+    }
 }

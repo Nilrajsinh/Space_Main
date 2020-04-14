@@ -25,6 +25,9 @@
 		F03C2340243DC6470064C4A4 /* SpaceUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03C233F243DC6470064C4A4 /* SpaceUITests.swift */; };
 		F03C2350243DC7630064C4A4 /* LogIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03C234F243DC7630064C4A4 /* LogIn.swift */; };
 		F03C2352243DD80B0064C4A4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F03C2351243DD80B0064C4A4 /* GoogleService-Info.plist */; };
+		F040318B2445AEC8007DEF76 /* FlowLayoutColllectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F040318A2445AEC8007DEF76 /* FlowLayoutColllectionView.swift */; };
+		F040318F2445B702007DEF76 /* Space_picture.swift in Sources */ = {isa = PBXBuildFile; fileRef = F040318E2445B702007DEF76 /* Space_picture.swift */; };
+		F04031912445C3B4007DEF76 /* FullScreenPic.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04031902445C3B4007DEF76 /* FullScreenPic.swift */; };
 		F047F8B424436D2700E4E2DB /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F047F8B324436D2700E4E2DB /* RoundButton.swift */; };
 		F07AC31024431DE3004CFA4D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07AC30F24431DE3004CFA4D /* HomeViewController.swift */; };
 /* End PBXBuildFile section */
@@ -77,6 +80,9 @@
 		F03C234D243DC6520064C4A4 /* Space.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Space.entitlements; sourceTree = "<group>"; };
 		F03C234F243DC7630064C4A4 /* LogIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogIn.swift; sourceTree = "<group>"; };
 		F03C2351243DD80B0064C4A4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F040318A2445AEC8007DEF76 /* FlowLayoutColllectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowLayoutColllectionView.swift; sourceTree = "<group>"; };
+		F040318E2445B702007DEF76 /* Space_picture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Space_picture.swift; sourceTree = "<group>"; };
+		F04031902445C3B4007DEF76 /* FullScreenPic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenPic.swift; sourceTree = "<group>"; };
 		F047F8B324436D2700E4E2DB /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		F07AC30F24431DE3004CFA4D /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		F23F35D74CBD546F64C07072 /* Pods-Space-SpaceUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Space-SpaceUITests.release.xcconfig"; path = "Target Support Files/Pods-Space-SpaceUITests/Pods-Space-SpaceUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -197,10 +203,13 @@
 				F07AC30F24431DE3004CFA4D /* HomeViewController.swift */,
 				F047F8B324436D2700E4E2DB /* RoundButton.swift */,
 				F033B43924445844009756FB /* Pictures.swift */,
+				F040318E2445B702007DEF76 /* Space_picture.swift */,
+				F04031902445C3B4007DEF76 /* FullScreenPic.swift */,
 				F033B43B24445856009756FB /* Video.swift */,
 				F033B43D24445863009756FB /* Favourite.swift */,
 				F033B43F24445D72009756FB /* PictureCell.swift */,
 				F033B441244462CE009756FB /* Content.swift */,
+				F040318A2445AEC8007DEF76 /* FlowLayoutColllectionView.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -486,12 +495,15 @@
 				F033B44024445D72009756FB /* PictureCell.swift in Sources */,
 				F033B442244462CE009756FB /* Content.swift in Sources */,
 				F07AC31024431DE3004CFA4D /* HomeViewController.swift in Sources */,
+				F04031912445C3B4007DEF76 /* FullScreenPic.swift in Sources */,
 				F03C231B243DC63F0064C4A4 /* AppDelegate.swift in Sources */,
 				F03C2325243DC63F0064C4A4 /* Space.xcdatamodeld in Sources */,
 				F03C231D243DC63F0064C4A4 /* SceneDelegate.swift in Sources */,
 				F033B43C24445856009756FB /* Video.swift in Sources */,
 				F033B43A24445844009756FB /* Pictures.swift in Sources */,
 				F03C2350243DC7630064C4A4 /* LogIn.swift in Sources */,
+				F040318B2445AEC8007DEF76 /* FlowLayoutColllectionView.swift in Sources */,
+				F040318F2445B702007DEF76 /* Space_picture.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

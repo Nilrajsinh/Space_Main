@@ -9,18 +9,22 @@
 import UIKit
 import Firebase
 import FirebaseStorage
+import SDWebImage
 
 
-private let reuseIdentifier = "Cell"
 
 
 
 class Pictures: UICollectionViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     
-   
+    var picture = [Space_picture]()
+    
     
     let imagePicker = UIImagePickerController()
     var ref: DatabaseReference!
+    var CustomImageFlow : FlowLayoutColllectionView!
+    
+    
     
     
     var Picturecollection = [""]
@@ -64,8 +68,8 @@ class Pictures: UICollectionViewController,UIImagePickerControllerDelegate,UINav
                     let key = self.ref.child(appDelegate.loginUserID).child("Images").childByAutoId().key
                     let image = ["url":downloadURL.absoluteString]
                     let childUpdate = ["/\(key ?? "")":image]
-                    self.ref.child(appDelegate.loginUserID).child("Images").childByAutoId().updateChildValues(childUpdate)
-            
+                    self.ref.updateChildValues(childUpdate)
+                    self.collectionView.reloadData()
                 }
         
                 
@@ -92,84 +96,74 @@ class Pictures: UICollectionViewController,UIImagePickerControllerDelegate,UINav
     }
     
     
-    
+    override func viewWillAppear(_ animated: Bool) {
+          self.tabBarController?.tabBar.isHidden = false
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        
-        ref = Database.database().reference()
-        
+        ref = Database.database().reference().child(appDelegate.loginUserID).child("Images")
         imagePicker.delegate = self
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
+        
+        loadDb()
+         self.tabBarController?.tabBar.isHidden = false
+        
+        var CustomImageFlow = FlowLayoutColllectionView()
+        collectionView.collectionViewLayout = CustomImageFlow
+        collectionView.backgroundColor =  .black
+        
+        
         // Do any additional setup after loading the view.
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
+    func loadDb(){
+      
+        ref.observe(DataEventType.value) { (snapshot) in
+            var newImage = [Space_picture]()
+            
+            for spacePic in snapshot.children {
+                let SpacePicObject = Space_picture(snapshot: spacePic as! DataSnapshot)
+                newImage.append(SpacePicObject)
+            }
+            self.picture = newImage
+            self.collectionView.reloadData()
+        }
+        
+        
     }
-    */
 
     // MARK: UICollectionViewDataSource
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 0
+        return picture.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! PictureCell
+       // cell.Picture.image = picture[indexPath.row]
     
-        // Configure the cell
+        cell.Picture.sd_setImage(with: URL(string: picture[indexPath.row].url), placeholderImage: #imageLiteral(resourceName: "photo-1517594422361-5eeb8ae275a9.jpg"))
     
         return cell
-    }
-
-    // MARK: UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
     
     }
-    */
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+       var drawVC  = self.storyboard?.instantiateViewController(withIdentifier: "DetailScene") as! FullScreenPic
+        
+        drawVC.imageURL = picture[indexPath.row].url
+       
+        // you can also pass string from array
+        self.navigationController?.pushViewController(drawVC, animated: true)
+    }
+
+    
+  
 
 }
