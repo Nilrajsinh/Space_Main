@@ -24,7 +24,7 @@ class Pictures: UICollectionViewController,UIImagePickerControllerDelegate,UINav
     var ref: DatabaseReference!
     var CustomImageFlow : FlowLayoutColllectionView!
     
-    var MainData : Data!
+
     
     
     
@@ -51,7 +51,7 @@ class Pictures: UICollectionViewController,UIImagePickerControllerDelegate,UINav
             
             //UploadImageTo Firebase
             var data = Data()
-            MainData.append(data)
+            
             data = pickedimage.jpegData(compressionQuality: 0.8)!
             
             let imageRef = Storage.storage().reference().child(appDelegate.loginUserID).child("Images/" + randomstring(20))
@@ -72,9 +72,6 @@ class Pictures: UICollectionViewController,UIImagePickerControllerDelegate,UINav
                     let image = ["url":downloadURL.absoluteString]
                     
                     //To get Url
-                  
-                   
-                    
                     let childUpdate = ["/\(key ?? "")":image]
                     self.ref.updateChildValues(childUpdate)
                     
@@ -168,7 +165,7 @@ class Pictures: UICollectionViewController,UIImagePickerControllerDelegate,UINav
        var drawVC  = self.storyboard?.instantiateViewController(withIdentifier: "DetailScene") as! FullScreenPic
    
         drawVC.imageURL = picture[indexPath.row].url
-        drawVC.MainDataFull = MainData
+    
         
         
         

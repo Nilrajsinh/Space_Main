@@ -66,7 +66,36 @@ class FullScreenPic: UIViewController {
     
     
     @IBAction func LikePic(_ sender: Any) {
+        var data = Data()
+                  
+        data = Data(imageURL!.utf8)
         
+                  let imageRef = Storage.storage().reference().child(appDelegate.loginUserID).child("LikedImages/" + randomstring(20))
+                  
+                  _ = imageRef.putData(data, metadata: nil){ (metadata ,error) in
+                      guard let metadata = metadata else {
+                          return
+                      }
+                      
+                      let size = metadata.size
+                      imageRef.downloadURL { (url, error) in
+                          guard let downloadURL = url else {
+                       
+                              return
+                          }
+                          print(downloadURL)
+                          let key = self.ref.child(appDelegate.loginUserID).child("LikedImages").childByAutoId().key
+                          let image = ["url":downloadURL.absoluteString]
+                          
+                          //To get Url
+                        
+                          let childUpdate = ["/\(key ?? "")":image]
+                        self.ref.child(appDelegate.loginUserID).child("LikedImages").updateChildValues(childUpdate)
+                          
+                      }
+              
+                      
+                  }
         
     }
     
