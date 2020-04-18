@@ -24,6 +24,7 @@ class Pictures: UICollectionViewController,UIImagePickerControllerDelegate,UINav
     var ref: DatabaseReference!
     var CustomImageFlow : FlowLayoutColllectionView!
     
+    var MainData : Data!
     
     
     
@@ -47,8 +48,10 @@ class Pictures: UICollectionViewController,UIImagePickerControllerDelegate,UINav
              dismiss(animated: true, completion: nil)
         
         if let pickedimage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
+            
             //UploadImageTo Firebase
             var data = Data()
+            MainData.append(data)
             data = pickedimage.jpegData(compressionQuality: 0.8)!
             
             let imageRef = Storage.storage().reference().child(appDelegate.loginUserID).child("Images/" + randomstring(20))
@@ -67,9 +70,16 @@ class Pictures: UICollectionViewController,UIImagePickerControllerDelegate,UINav
                     print(downloadURL)
                     let key = self.ref.child(appDelegate.loginUserID).child("Images").childByAutoId().key
                     let image = ["url":downloadURL.absoluteString]
+                    
+                    //To get Url
+                  
+                   
+                    
                     let childUpdate = ["/\(key ?? "")":image]
                     self.ref.updateChildValues(childUpdate)
+                    
                     self.collectionView.reloadData()
+                    
                 }
         
                 
@@ -156,9 +166,12 @@ class Pictures: UICollectionViewController,UIImagePickerControllerDelegate,UINav
     }
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
        var drawVC  = self.storyboard?.instantiateViewController(withIdentifier: "DetailScene") as! FullScreenPic
-        
+   
         drawVC.imageURL = picture[indexPath.row].url
-       
+        drawVC.MainDataFull = MainData
+        
+        
+        
         // you can also pass string from array
         self.navigationController?.pushViewController(drawVC, animated: true)
     }

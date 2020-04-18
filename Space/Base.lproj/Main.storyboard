@@ -228,6 +228,7 @@
                     </view>
                     <connections>
                         <outlet property="FullImage" destination="hJQ-46-zt9" id="xCc-wH-ANV"/>
+                        <segue destination="NrG-sE-HBc" kind="presentation" identifier="Back" modalPresentationStyle="fullScreen" id="5aq-9a-SUe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K1w-69-QwI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -264,7 +265,11 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="W8o-s7-Kze">
-                        <barButtonItem key="rightBarButtonItem" title="Add" image="plus.circle.fill" catalog="system" id="W0l-hJ-ddS"/>
+                        <barButtonItem key="rightBarButtonItem" title="Add" image="plus.circle.fill" catalog="system" id="W0l-hJ-ddS">
+                            <connections>
+                                <action selector="addVideo:" destination="fHD-kW-RYo" id="7hD-KX-d0z"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bew-jf-EoE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -399,6 +404,9 @@
             <point key="canvasLocation" x="2589.5999999999999" y="1426.8472906403942"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="5aq-9a-SUe"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="Screenshot 2019-11-27 at 10.18.50 PM" width="309" height="323"/>
         <image name="arrowshape.turn.up.right.fill" catalog="system" width="128" height="106"/>

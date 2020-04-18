@@ -7,16 +7,87 @@
 //
 
 import UIKit
+import MobileCoreServices
+import AVFoundation
+import Firebase
 
 private let reuseIdentifier = "Cell"
 
-class Video: UICollectionViewController {
+class Video: UICollectionViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
 
+    var Video = [""]
+    
+    let imagePicker = UIImagePickerController()
+    
+    
+    @IBAction func addVideo(_ sender: Any) {
+        let picker =  UIImagePickerController()
+            picker.delegate = self
+            picker.allowsEditing = false
+        picker.mediaTypes = [kUTTypeMovie as String]
+        
+            present(picker, animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+           print("Cancled picker")
+           self.dismiss(animated: true, completion: nil)
+       }
+    
+
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        let VideoUrl = info[UIImagePickerController.InfoKey.mediaType] as AnyObject
+        
+        if  VideoUrl as! String == kUTTypeMovie as String {
+            let videoURL = info[UIImagePickerController.InfoKey.mediaURL] as? URL
+                print("VIDEO URL: \(videoURL!)")
+            
+            var data = Data()
+            
+            do {
+                data = try Data(contentsOf: videoURL! as URL)
+            } catch  {
+                print("Not Working")
+            }
+            
+            Storage.storage().reference().child(appDelegate.loginUserID).child("Video/" + randomstring(20)).putData(data, metadata: nil) { (metadata, error) in
+                if error != nil {
+                            print("Faild to upload video",error!)
+                                }
+                        else{
+                              print("Done")
+                            }
+            }
+            
+
+        }
+         dismiss(animated: true, completion: nil)
+    
+    }
+    
+    func randomstring(_ length: Int) -> String {
+           let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+           let len = UInt32(letters.length)
+           
+           var randomstring = ""
+           
+           for _ in 0..<length {
+               let rand = arc4random_uniform(len)
+               var nextchar = letters.character(at: Int(rand))
+               randomstring += NSString(characters: &nextchar, length: 1) as String
+             
+           }
+           return randomstring
+           
+       }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+       imagePicker.delegate = self
 
         // Register cell classes
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
@@ -24,15 +95,7 @@ class Video: UICollectionViewController {
         // Do any additional setup after loading the view.
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
+   
 
     // MARK: UICollectionViewDataSource
 
@@ -57,33 +120,6 @@ class Video: UICollectionViewController {
 
     // MARK: UICollectionViewDelegate
 
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-    
-    }
-    */
+   
 
 }

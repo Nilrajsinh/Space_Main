@@ -13,31 +13,69 @@ import Firebase
 class FullScreenPic: UIViewController {
 
     @IBOutlet weak var FullImage: UIImageView!
-    
+     var ref: DatabaseReference!
     let storage = Storage.storage()
    
-    
-    
+    var MainDataFull : Data!
     
     var imageURL : String?
     
-    var Mainurl : URL!
+
     
   
     @IBAction func Save(_ sender: Any) {
         
-      
+   
+                 let alert = UIAlertController(title: "Save", message: "Would you like to save photo??", preferredStyle: .alert)
+                 let yeah = UIAlertAction(title: "Yeah", style: .default) { (action) in
+            
+                    UIImageWriteToSavedPhotosAlbum(self.FullImage.image!, nil, nil, nil)
+                 }
+                 let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                 alert.addAction(cancel)
+                 alert.addAction(yeah)
+                 self.present(alert, animated: true, completion: nil)
+            
+        
         
     }
     
     @IBAction func Share(_ sender: Any) {
+        
+        let activityVC = UIActivityViewController(activityItems: [FullImage.image], applicationActivities: nil)
+              activityVC.popoverPresentationController?.sourceView = self.view
+              present(activityVC ,animated : true ,completion : nil)
+        
     }
     
+    func randomstring(_ length: Int) -> String {
+        let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        let len = UInt32(letters.length)
+        
+        var randomstring = ""
+        
+        for _ in 0..<length {
+            let rand = arc4random_uniform(len)
+            var nextchar = letters.character(at: Int(rand))
+            randomstring += NSString(characters: &nextchar, length: 1) as String
+          
+        }
+        return randomstring
+        
+    }
+    
+    
     @IBAction func LikePic(_ sender: Any) {
+        
+        
     }
     
     @IBAction func DeletePic(_ sender: Any) {
-      
+  
+        
+        let deleteMess = Database.database().reference().child(appDelegate.loginUserID).child("Images")
+     print(deleteMess)
+        
     }
     
     var dimg = UIImage()
@@ -47,7 +85,7 @@ class FullScreenPic: UIViewController {
         super.viewDidLoad()
         
         
-      
+      ref = Database.database().reference()
         
         
         let pinch = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(sender:)))
