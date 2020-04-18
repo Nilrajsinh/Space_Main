@@ -14,11 +14,12 @@ import Firebase
 private let reuseIdentifier = "Cell"
 
 class Video: UICollectionViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
-
-    var Video = [""]
-    
+ 
+    var CustomImageFlow : FlowLayoutColllectionView!
+    var Videost = [""]
+    var Video = [Space_picture]()
     let imagePicker = UIImagePickerController()
-    
+      var ref: DatabaseReference!
     
     @IBAction func addVideo(_ sender: Any) {
         let picker =  UIImagePickerController()
@@ -41,31 +42,77 @@ class Video: UICollectionViewController,UIImagePickerControllerDelegate,UINaviga
         let VideoUrl = info[UIImagePickerController.InfoKey.mediaType] as AnyObject
         
         if  VideoUrl as! String == kUTTypeMovie as String {
-            let videoURL = info[UIImagePickerController.InfoKey.mediaURL] as? URL
-                print("VIDEO URL: \(videoURL!)")
+            let vidURL = info[UIImagePickerController.InfoKey.mediaURL] as? URL
+                print("VIDEO URL: \(vidURL!)")
             
             var data = Data()
             
             do {
-                data = try Data(contentsOf: videoURL! as URL)
+                data = try Data(contentsOf: vidURL! as URL)
             } catch  {
                 print("Not Working")
             }
             
-            Storage.storage().reference().child(appDelegate.loginUserID).child("Video/" + randomstring(20)).putData(data, metadata: nil) { (metadata, error) in
+          let uploadtask = Storage.storage().reference().child(appDelegate.loginUserID).child("Video/" + randomstring(20)).putData(data, metadata: nil) { (metadata, error) in
                 if error != nil {
                             print("Faild to upload video",error!)
                                 }
                         else{
+               
+                    let key = self.ref.child(appDelegate.loginUserID).child("Video").childByAutoId().key
+                    let MainVid = ["url":vidURL!.absoluteString]
+                    
+                    //To get Url
+                    let childUpdate = ["/\(key ?? "")":MainVid]
+                    self.ref.child(appDelegate.loginUserID).child("Video").updateChildValues(childUpdate)
+                    
+                    self.collectionView.reloadData()
+                    
+                    if let VideoUrl = vidURL?.absoluteString{
+                        print(VideoUrl)
+                    }
+                    
+                    let Propertise : [String:AnyObject] = ["Video Url":VideoUrl]
+                    
+                    
+//                    let thumbnailImage = self.ThumbnailImageForVideoUrl(videourl: vidURL!)
+                    
+//                    self.sendMessageWithProperTise(Propertise)
+                    
                               print("Done")
                             }
             }
-            
-
         }
-         dismiss(animated: true, completion: nil)
-    
+        dismiss(animated: true, completion: nil)
     }
+    
+//    func LoadVideo(){
+//
+//           ref.observe(DataEventType.value) { (snapshot) in
+//               var newImage = [Space_picture]()
+//
+//               for spacePic in snapshot.children {
+//                   let SpacePicObject = Space_picture(snapshot: spacePic as! DataSnapshot)
+//                   newImage.append(SpacePicObject)
+//               }
+//               self.Video = newImage
+//               self.collectionView.reloadData()
+//           }
+//
+//
+//       }
+    
+    
+//    private func ThumbnailImageForVideoUrl(videourl:URL) -> UIImage{
+//
+////     Baki che 23:07
+//        return
+//
+//    }
+//    func sendMessageWithProperTise() {
+//        return
+//
+//    }
     
     func randomstring(_ length: Int) -> String {
            let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
@@ -86,9 +133,17 @@ class Video: UICollectionViewController,UIImagePickerControllerDelegate,UINaviga
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+       
+        
+        var CustomImageFlow = FlowLayoutColllectionView()
+            collectionView.collectionViewLayout = CustomImageFlow
+            collectionView.backgroundColor =  .black
+            
+        
+        
+       // self.LoadVideo()
        imagePicker.delegate = self
-
+        ref = Database.database().reference()
         // Register cell classes
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
@@ -107,7 +162,8 @@ class Video: UICollectionViewController,UIImagePickerControllerDelegate,UINaviga
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 0
+        return Video.count
+        print(Video.count)
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

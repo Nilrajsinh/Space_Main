@@ -7,54 +7,79 @@
 //
 
 import UIKit
+import Firebase
+import SDWebImage
 
-private let reuseIdentifier = "Cell"
+
+
 
 class Favourite: UICollectionViewController {
 
+    
+    var LikePic = [Space_picture]()
+    
+    
+    var ref: DatabaseReference!
+       var CustomImageFlow : FlowLayoutColllectionView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
-        // Do any additional setup after loading the view.
+        ref = Database.database().reference().child(appDelegate.loginUserID).child("LikedImages")
+              
+               
+        self.loadDb()
+                self.tabBarController?.tabBar.isHidden = false
+               
+               var CustomImageFlow = FlowLayoutColllectionView()
+               collectionView.collectionViewLayout = CustomImageFlow
+               collectionView.backgroundColor =  .black
+        
+        collectionView.reloadData()
+       
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
+    func loadDb(){
+      
+        ref.observe(DataEventType.value) { (snapshot) in
+            var newImage = [Space_picture]()
+            
+            for spacePic in snapshot.children {
+                let SpacePicObject = Space_picture(snapshot: spacePic as! DataSnapshot)
+                newImage.append(SpacePicObject)
+            }
+            self.LikePic = newImage
+            self.collectionView.reloadData()
+        }
+        
+        
     }
-    */
+    
+
+    
 
     // MARK: UICollectionViewDataSource
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 0
+        return LikePic.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-    
-        // Configure the cell
-    
-        return cell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! LikedCell
+              // cell.Picture.image = picture[indexPath.row]
+           
+               cell.Picture.sd_setImage(with: URL(string: LikePic[indexPath.row].url), placeholderImage: #imageLiteral(resourceName: "photo-1517594422361-5eeb8ae275a9.jpg"))
+           
+               return cell
     }
-
+    
+   
     // MARK: UICollectionViewDelegate
 
     /*

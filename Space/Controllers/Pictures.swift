@@ -19,15 +19,10 @@ class Pictures: UICollectionViewController,UIImagePickerControllerDelegate,UINav
     
     var picture = [Space_picture]()
     
-    
     let imagePicker = UIImagePickerController()
     var ref: DatabaseReference!
     var CustomImageFlow : FlowLayoutColllectionView!
-    
-
-    
-    
-    
+   
     var Picturecollection = [""]
     
     @IBAction func AddBtn(_ sender: Any) {
@@ -122,6 +117,7 @@ class Pictures: UICollectionViewController,UIImagePickerControllerDelegate,UINav
         
         // Do any additional setup after loading the view.
     }
+    
 
     func loadDb(){
       
@@ -166,9 +162,6 @@ class Pictures: UICollectionViewController,UIImagePickerControllerDelegate,UINav
    
         drawVC.imageURL = picture[indexPath.row].url
     
-        
-        
-        
         // you can also pass string from array
         self.navigationController?.pushViewController(drawVC, animated: true)
     }

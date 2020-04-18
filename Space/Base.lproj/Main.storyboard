@@ -250,13 +250,31 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="BfJ-BQ-hgE">
-                                <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="BfJ-BQ-hgE" customClass="VideoCell" customModule="Space" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="135" height="135"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="roV-iX-tua">
-                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="135" height="135"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo-1517594422361-5eeb8ae275a9" translatesAutoresizingMaskIntoConstraints="NO" id="w6O-Nd-Qh6">
+                                            <rect key="frame" x="0.0" y="0.0" width="135" height="135"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="w6O-Nd-Qh6" secondAttribute="height" multiplier="1:1" id="jNn-Zb-cfG"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="w6O-Nd-Qh6" firstAttribute="top" secondItem="roV-iX-tua" secondAttribute="top" id="H7i-NB-wwy"/>
+                                        <constraint firstItem="w6O-Nd-Qh6" firstAttribute="leading" secondItem="roV-iX-tua" secondAttribute="leading" id="Kge-lO-xHJ"/>
+                                        <constraint firstAttribute="bottom" secondItem="w6O-Nd-Qh6" secondAttribute="bottom" id="uox-6j-ZPI"/>
+                                        <constraint firstAttribute="trailing" secondItem="w6O-Nd-Qh6" secondAttribute="trailing" id="xyB-QI-LoC"/>
+                                    </constraints>
                                 </collectionViewCellContentView>
+                                <size key="customSize" width="135" height="135"/>
+                                <connections>
+                                    <outlet property="VideoThumb" destination="w6O-Nd-Qh6" id="mst-WY-wtb"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>
@@ -274,7 +292,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bew-jf-EoE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3524" y="771.42857142857144"/>
+            <point key="canvasLocation" x="3523.1884057971015" y="771.42857142857144"/>
         </scene>
         <!--Favourite-->
         <scene sceneID="ggj-ZA-Tml">
@@ -291,13 +309,34 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="FeC-86-dSO">
-                                <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="FeC-86-dSO" customClass="LikedCell" customModule="Space" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="135" height="135"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="MlJ-0X-2AH">
-                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="135" height="135"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo-1517594422361-5eeb8ae275a9" translatesAutoresizingMaskIntoConstraints="NO" id="VQG-QO-yiw">
+                                            <rect key="frame" x="0.0" y="0.0" width="135" height="135"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="135" id="6Vd-cX-wct"/>
+                                                <constraint firstAttribute="width" secondItem="VQG-QO-yiw" secondAttribute="height" multiplier="135:136" id="D3W-wg-PGx"/>
+                                                <constraint firstAttribute="width" constant="135" id="Pgk-i5-V8i"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="VQG-QO-yiw" secondAttribute="trailing" id="3Nw-UG-8J2"/>
+                                        <constraint firstItem="VQG-QO-yiw" firstAttribute="top" secondItem="MlJ-0X-2AH" secondAttribute="top" id="4HS-we-9Q2"/>
+                                        <constraint firstAttribute="bottom" secondItem="VQG-QO-yiw" secondAttribute="bottom" id="4Wd-6V-dZz"/>
+                                        <constraint firstItem="VQG-QO-yiw" firstAttribute="leading" secondItem="MlJ-0X-2AH" secondAttribute="leading" id="Xou-ib-x9y"/>
+                                        <constraint firstItem="VQG-QO-yiw" firstAttribute="top" secondItem="MlJ-0X-2AH" secondAttribute="top" id="xpe-UE-XhV"/>
+                                    </constraints>
                                 </collectionViewCellContentView>
+                                <size key="customSize" width="135" height="135"/>
+                                <connections>
+                                    <outlet property="Picture" destination="VQG-QO-yiw" id="LSp-eB-HUK"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>
@@ -305,13 +344,11 @@
                             <outlet property="delegate" destination="5AT-xw-RT3" id="DFT-34-tbM"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="Jjl-MF-aDK">
-                        <barButtonItem key="rightBarButtonItem" title="Add" image="plus.circle.fill" catalog="system" id="eEb-qr-Lby"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="Jjl-MF-aDK"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uTe-C9-sVr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3532" y="1426.8472906403942"/>
+            <point key="canvasLocation" x="3531.884057971015" y="1426.3392857142856"/>
         </scene>
         <!--Settings-->
         <scene sceneID="hKR-6z-JHA">
