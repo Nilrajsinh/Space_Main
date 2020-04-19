@@ -45,45 +45,64 @@ class Video: UICollectionViewController,UIImagePickerControllerDelegate,UINaviga
             let vidURL = info[UIImagePickerController.InfoKey.mediaURL] as? URL
                 print("VIDEO URL: \(vidURL!)")
             
-            var data = Data()
+         ///
+           
             
             do {
-                data = try Data(contentsOf: vidURL! as URL)
-            } catch  {
-                print("Not Working")
-            }
+                       if #available(iOS 13, *) {
+                           //If on iOS13 slice the URL to get the name of the file
+                           let urlString = vidURL!.relativeString
+                           let urlSlices = urlString.split(separator: ".")
+                           //Create a temp directory using the file name
+                           let tempDirectoryURL = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+                           let targetURL = tempDirectoryURL.appendingPathComponent(String(urlSlices[1])).appendingPathExtension(String(urlSlices[2]))
+
+                           //Copy the video over
+                           try FileManager.default.copyItem(at: vidURL!, to: targetURL)
+
+                           picker.dismiss(animated: true) {
+                            let videoref = Storage.storage().reference().child(appDelegate.loginUserID).child("Video/" + self.randomstring(20))
+                                  
+                                  
+                            let uploadtask = videoref.putFile(from: targetURL, metadata: nil) { (metadata, error) in
+                                      if error != nil {
+                                          print("Failed to upload video :",error)
+                                      }
+                                      else{
+                                           print("Video Upload Done")
+                                      }
+                                     
+                                  }
+                           }
+                       }
+                       else {
+                           //If on iOS12 just use the original URL
+                           picker.dismiss(animated: true) {
+                            let videoref = Storage.storage().reference().child(appDelegate.loginUserID).child("Video/" + self.randomstring(20))
+                               
+                               
+                               let uploadtask = videoref.putFile(from: vidURL!, metadata: nil) { (metadata, error) in
+                                   if error != nil {
+                                       print("Failed to upload video :",error)
+                                   }
+                                   else{
+                                        print("Video Upload Done")
+                                   }
+                                  
+                               }
+                             
+                           }
+                       }
+                   }
+                   catch let error {
+                       //Handle errors
+                   }
             
-          let uploadtask = Storage.storage().reference().child(appDelegate.loginUserID).child("Video/" + randomstring(20)).putData(data, metadata: nil) { (metadata, error) in
-                if error != nil {
-                            print("Faild to upload video",error!)
-                                }
-                        else{
-               
-                    let key = self.ref.child(appDelegate.loginUserID).child("Video").childByAutoId().key
-                    let MainVid = ["url":vidURL!.absoluteString]
-                    
-                    //To get Url
-                    let childUpdate = ["/\(key ?? "")":MainVid]
-                    self.ref.child(appDelegate.loginUserID).child("Video").updateChildValues(childUpdate)
-                    
-                    self.collectionView.reloadData()
-                    
-                    if let VideoUrl = vidURL?.absoluteString{
-                        print(VideoUrl)
-                    }
-                    
-                    let Propertise : [String:AnyObject] = ["Video Url":VideoUrl]
-                    
-                    
-//                    let thumbnailImage = self.ThumbnailImageForVideoUrl(videourl: vidURL!)
-                    
-//                    self.sendMessageWithProperTise(Propertise)
-                    
-                              print("Done")
-                            }
-            }
+            ///
+     
+      
         }
-        dismiss(animated: true, completion: nil)
+        
     }
     
 //    func LoadVideo(){
