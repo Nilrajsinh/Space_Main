@@ -183,7 +183,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="skF-c3-oF5">
-                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
+                                <rect key="frame" x="0.0" y="818" width="414" height="44"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <items>
                                     <barButtonItem title="Save" image="square.and.arrow.down.fill" catalog="system" id="xGT-f2-izk">
@@ -308,21 +308,20 @@
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo-1517594422361-5eeb8ae275a9" translatesAutoresizingMaskIntoConstraints="NO" id="O2L-gs-lTd">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="O2L-gs-lTd" secondAttribute="height" multiplier="207:448" id="Rjf-QA-00E"/>
-                                        </constraints>
                                     </imageView>
-                                    <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jqE-2x-My3">
+                                    <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jqE-2x-My3">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="r1c-Ak-TOq">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IbN-Gs-da8" customClass="RoundButton" customModule="Space" customModuleProvider="target">
-                                                    <rect key="frame" x="114" y="401" width="186" height="95"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IbN-Gs-da8" customClass="RoundButton" customModule="Space" customModuleProvider="target">
+                                                    <rect key="frame" x="114" y="401" width="186" height="94"/>
                                                     <color key="backgroundColor" red="0.79290502009999997" green="0.83177137869999995" blue="1" alpha="0.37037649989999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="186" id="GCx-0Z-0nD"/>
+                                                        <constraint firstAttribute="height" constant="94" id="sLl-jN-AOL"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <color key="tintColor" red="1" green="0.19045169319999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <state key="normal" title="Play Video" image="play.fill" catalog="system">
@@ -343,60 +342,65 @@
                                                         <action selector="Play:" destination="pIY-WG-3R6" eventType="touchUpInside" id="SqD-C0-ykh"/>
                                                     </connections>
                                                 </button>
+                                                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ckU-J5-3Wy">
+                                                    <rect key="frame" x="-7" y="813" width="421" height="49"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <items>
+                                                        <barButtonItem title="Save" image="square.and.arrow.down.fill" catalog="system" id="U1C-Rw-rcI">
+                                                            <color key="tintColor" red="1" green="0.19045169319999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <connections>
+                                                                <action selector="Save:" destination="FfQ-ei-NPG" id="6iv-ZC-RJH"/>
+                                                            </connections>
+                                                        </barButtonItem>
+                                                        <barButtonItem style="plain" systemItem="flexibleSpace" id="mIl-Bc-kbB"/>
+                                                        <barButtonItem title="Share" image="arrowshape.turn.up.right.fill" catalog="system" id="10Q-pp-O6q">
+                                                            <color key="tintColor" red="1" green="0.19045169319999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <connections>
+                                                                <action selector="Share:" destination="pIY-WG-3R6" id="LvP-ye-U8e"/>
+                                                            </connections>
+                                                        </barButtonItem>
+                                                        <barButtonItem style="plain" systemItem="flexibleSpace" id="uz5-oG-6lt"/>
+                                                        <barButtonItem title="Like" image="heart.fill" catalog="system" id="tmv-Hl-hbm">
+                                                            <color key="tintColor" red="1" green="0.19045169319999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </barButtonItem>
+                                                        <barButtonItem style="plain" systemItem="flexibleSpace" id="oPD-ax-ZJW"/>
+                                                        <barButtonItem title="Delete" image="bin.xmark.fill" catalog="system" id="gKk-Vo-KPd">
+                                                            <color key="tintColor" red="1" green="0.19045169319999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </barButtonItem>
+                                                    </items>
+                                                    <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </toolbar>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="IbN-Gs-da8" firstAttribute="centerY" secondItem="r1c-Ak-TOq" secondAttribute="centerY" id="UYT-SD-G5r"/>
+                                                <constraint firstItem="ckU-J5-3Wy" firstAttribute="leading" secondItem="r1c-Ak-TOq" secondAttribute="leading" constant="-7" id="VyQ-R6-oLc"/>
+                                                <constraint firstItem="IbN-Gs-da8" firstAttribute="centerX" secondItem="r1c-Ak-TOq" secondAttribute="centerX" id="cta-Vp-35p"/>
+                                                <constraint firstAttribute="trailing" secondItem="ckU-J5-3Wy" secondAttribute="trailing" id="pKg-j7-9ds"/>
+                                                <constraint firstAttribute="bottom" secondItem="ckU-J5-3Wy" secondAttribute="bottom" constant="34" id="y9T-Jb-bYe"/>
+                                            </constraints>
                                         </view>
                                         <blurEffect style="systemThinMaterialDark"/>
                                     </visualEffectView>
-                                    <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ckU-J5-3Wy">
-                                        <rect key="frame" x="0.0" y="852" width="414" height="44"/>
-                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="44" id="Ieq-Mf-icO"/>
-                                        </constraints>
-                                        <items>
-                                            <barButtonItem title="Save" image="square.and.arrow.down.fill" catalog="system" id="U1C-Rw-rcI">
-                                                <color key="tintColor" red="1" green="0.19045169319999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <connections>
-                                                    <action selector="Save:" destination="FfQ-ei-NPG" id="6iv-ZC-RJH"/>
-                                                </connections>
-                                            </barButtonItem>
-                                            <barButtonItem style="plain" systemItem="flexibleSpace" id="mIl-Bc-kbB"/>
-                                            <barButtonItem title="Share" image="arrowshape.turn.up.right.fill" catalog="system" id="10Q-pp-O6q">
-                                                <color key="tintColor" red="1" green="0.19045169319999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <connections>
-                                                    <action selector="Share:" destination="pIY-WG-3R6" id="LvP-ye-U8e"/>
-                                                </connections>
-                                            </barButtonItem>
-                                            <barButtonItem style="plain" systemItem="flexibleSpace" id="uz5-oG-6lt"/>
-                                            <barButtonItem title="Like" image="heart.fill" catalog="system" id="tmv-Hl-hbm">
-                                                <color key="tintColor" red="1" green="0.19045169319999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </barButtonItem>
-                                            <barButtonItem style="plain" systemItem="flexibleSpace" id="oPD-ax-ZJW"/>
-                                            <barButtonItem title="Delete" image="bin.xmark.fill" catalog="system" id="gKk-Vo-KPd">
-                                                <color key="tintColor" red="1" green="0.19045169319999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </barButtonItem>
-                                        </items>
-                                        <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </toolbar>
                                 </subviews>
-                                <color key="backgroundColor" red="0.89774589952894612" green="1" blue="0.9787602375098029" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="ckU-J5-3Wy" firstAttribute="leading" secondItem="nM3-FF-PWp" secondAttribute="leading" id="6Ep-of-mMu"/>
-                                    <constraint firstItem="O2L-gs-lTd" firstAttribute="top" secondItem="nM3-FF-PWp" secondAttribute="top" id="9Vp-xh-sUM"/>
-                                    <constraint firstAttribute="bottom" secondItem="O2L-gs-lTd" secondAttribute="bottom" id="M4J-du-oaM"/>
-                                    <constraint firstAttribute="trailing" secondItem="ckU-J5-3Wy" secondAttribute="trailing" id="P5b-lE-C2a"/>
-                                    <constraint firstAttribute="bottom" secondItem="ckU-J5-3Wy" secondAttribute="bottom" id="R3a-vO-Xp0"/>
-                                    <constraint firstItem="O2L-gs-lTd" firstAttribute="leading" secondItem="nM3-FF-PWp" secondAttribute="leading" id="aql-e3-eib"/>
-                                    <constraint firstAttribute="trailing" secondItem="O2L-gs-lTd" secondAttribute="trailing" id="fSw-6N-eLl"/>
+                                    <constraint firstItem="jqE-2x-My3" firstAttribute="leading" secondItem="O2L-gs-lTd" secondAttribute="leading" id="HVT-CR-9yP"/>
+                                    <constraint firstAttribute="trailing" secondItem="jqE-2x-My3" secondAttribute="trailing" id="W11-6F-uIc"/>
+                                    <constraint firstItem="jqE-2x-My3" firstAttribute="bottom" secondItem="O2L-gs-lTd" secondAttribute="bottom" id="aDQ-Cf-MuJ"/>
+                                    <constraint firstItem="O2L-gs-lTd" firstAttribute="top" secondItem="nM3-FF-PWp" secondAttribute="top" id="d4P-NB-HE8"/>
+                                    <constraint firstAttribute="bottom" secondItem="O2L-gs-lTd" secondAttribute="bottom" id="oet-85-S67"/>
+                                    <constraint firstItem="jqE-2x-My3" firstAttribute="top" secondItem="O2L-gs-lTd" secondAttribute="top" id="qdI-te-vBS"/>
+                                    <constraint firstItem="jqE-2x-My3" firstAttribute="trailing" secondItem="O2L-gs-lTd" secondAttribute="trailing" id="z9D-xC-3Ks"/>
+                                    <constraint firstItem="O2L-gs-lTd" firstAttribute="leading" secondItem="nM3-FF-PWp" secondAttribute="leading" id="zgw-FQ-spS"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="nM3-FF-PWp" firstAttribute="top" secondItem="8qd-Yy-qr1" secondAttribute="topMargin" constant="-44" id="2Qk-xC-PLe"/>
-                            <constraint firstItem="nM3-FF-PWp" firstAttribute="centerX" secondItem="8qd-Yy-qr1" secondAttribute="centerX" id="3TY-cH-cy5"/>
-                            <constraint firstItem="nM3-FF-PWp" firstAttribute="leading" secondItem="JlP-Sp-g71" secondAttribute="leading" id="N1X-eT-ULe"/>
-                            <constraint firstItem="nM3-FF-PWp" firstAttribute="centerY" secondItem="8qd-Yy-qr1" secondAttribute="centerY" id="XQ2-jD-9gG"/>
+                            <constraint firstItem="nM3-FF-PWp" firstAttribute="leading" secondItem="8qd-Yy-qr1" secondAttribute="leading" id="1tb-YI-9ia"/>
+                            <constraint firstAttribute="bottom" secondItem="nM3-FF-PWp" secondAttribute="bottom" id="KZb-0W-Yle"/>
+                            <constraint firstAttribute="trailing" secondItem="nM3-FF-PWp" secondAttribute="trailing" id="MVZ-cU-ObH"/>
+                            <constraint firstItem="nM3-FF-PWp" firstAttribute="top" secondItem="8qd-Yy-qr1" secondAttribute="top" id="krI-5V-eXG"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="JlP-Sp-g71"/>
                     </view>
