@@ -7,35 +7,75 @@
 //
 
 import UIKit
+import AVFoundation
+import AVKit
 
 class FullScreenVideo: UIViewController {
     
+    var selectedVideo = [""]
+    
+   
+    var url = String()
+    var playerLayer: AVPlayerLayer?
+      var player: AVPlayer?
+      var isLoop: Bool = true
+    
     @IBOutlet weak var Player: PlayerView!
-    
-    
-    
-    
     
     override func viewWillAppear(_ animated: Bool) {
         tabBarController?.tabBar.isHidden = true
+    
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
+//        let vidUrl = URL(string: url)
+//
+//              let avplayer = AVPlayer(url: vidUrl as! URL )
+//
+//
+//              Player.PlayerLayer.player = avplayer
+//
+//              Player.player?.play()
+        
+        
         // Do any additional setup after loading the view.
     }
+  
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    //Button
+    
+    @IBAction func Play(_ sender: Any) {
+        
+         let vidUrl = URL(string: url)
+        
+        let avplayer = AVPlayer(url: vidUrl as! URL )
+        
+        let videoplayer = AVPlayerViewController()
+        
+        videoplayer.player = avplayer
+        self.present(videoplayer, animated: true , completion: {
+            avplayer.play()
+        })
+        
     }
-    */
+    
+   
+    
+    @IBAction func Share(_ sender: Any) {
+           
+        
+        let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+                        activityVC.popoverPresentationController?.sourceView = self.view
+                        present(activityVC ,animated : true ,completion : nil)
+           
+       }
+    
+    
+   
+
+   
 
 }

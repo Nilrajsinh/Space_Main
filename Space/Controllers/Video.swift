@@ -189,7 +189,7 @@ class Video: UICollectionViewController,UIImagePickerControllerDelegate,UINaviga
     
     override func viewWillAppear(_ animated: Bool) {
         tabBarController?.tabBar.isHidden = false
-        collectionView.reloadData()
+        
     }
     
     override func viewDidLoad() {
@@ -246,6 +246,17 @@ class Video: UICollectionViewController,UIImagePickerControllerDelegate,UINaviga
         // Configure the cell
     
         return cell
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+           var drawVC  = self.storyboard?.instantiateViewController(withIdentifier: "VideoScene") as! FullScreenVideo
+      
+        let url = Video[indexPath.row].url
+        
+      
+        drawVC.url = url!
+            
+             self.navigationController?.pushViewController(drawVC, animated: true)
     }
 
     // MARK: UICollectionViewDelegate

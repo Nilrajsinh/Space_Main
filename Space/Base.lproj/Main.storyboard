@@ -298,19 +298,61 @@
         <!--Full Screen Video-->
         <scene sceneID="nYM-dV-nYx">
             <objects>
-                <viewController id="pIY-WG-3R6" customClass="FullScreenVideo" customModule="Space" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="VideoScene" useStoryboardIdentifierAsRestorationIdentifier="YES" id="pIY-WG-3R6" customClass="FullScreenVideo" customModule="Space" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8qd-Yy-qr1">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nM3-FF-PWp" customClass="PlayerView" customModule="Space" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nM3-FF-PWp" customClass="PlayerView" customModule="Space" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ckU-J5-3Wy">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo-1517594422361-5eeb8ae275a9" translatesAutoresizingMaskIntoConstraints="NO" id="O2L-gs-lTd">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="O2L-gs-lTd" secondAttribute="height" multiplier="207:448" id="Rjf-QA-00E"/>
+                                        </constraints>
+                                    </imageView>
+                                    <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jqE-2x-My3">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="r1c-Ak-TOq">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IbN-Gs-da8" customClass="RoundButton" customModule="Space" customModuleProvider="target">
+                                                    <rect key="frame" x="114" y="401" width="186" height="95"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" red="0.79290502009999997" green="0.83177137869999995" blue="1" alpha="0.37037649989999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                    <color key="tintColor" red="1" green="0.19045169319999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <state key="normal" title="Play Video" image="play.fill" catalog="system">
+                                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="40" scale="large" weight="bold"/>
+                                                    </state>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="45"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                            <real key="value" value="0.0"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                            <color key="value" red="1" green="0.19045169319999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="Play:" destination="pIY-WG-3R6" eventType="touchUpInside" id="SqD-C0-ykh"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                        </view>
+                                        <blurEffect style="systemThinMaterialDark"/>
+                                    </visualEffectView>
+                                    <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ckU-J5-3Wy">
                                         <rect key="frame" x="0.0" y="852" width="414" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="Ieq-Mf-icO"/>
+                                        </constraints>
                                         <items>
                                             <barButtonItem title="Save" image="square.and.arrow.down.fill" catalog="system" id="U1C-Rw-rcI">
                                                 <color key="tintColor" red="1" green="0.19045169319999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -321,16 +363,11 @@
                                             <barButtonItem style="plain" systemItem="flexibleSpace" id="mIl-Bc-kbB"/>
                                             <barButtonItem title="Share" image="arrowshape.turn.up.right.fill" catalog="system" id="10Q-pp-O6q">
                                                 <color key="tintColor" red="1" green="0.19045169319999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </barButtonItem>
-                                            <barButtonItem style="plain" systemItem="flexibleSpace" id="owd-7z-5q4"/>
-                                            <barButtonItem title="Pause" image="equal.circle.fill" catalog="system" id="E7U-2b-Km3">
-                                                <color key="tintColor" red="1" green="0.19045169319999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <connections>
+                                                    <action selector="Share:" destination="pIY-WG-3R6" id="LvP-ye-U8e"/>
+                                                </connections>
                                             </barButtonItem>
                                             <barButtonItem style="plain" systemItem="flexibleSpace" id="uz5-oG-6lt"/>
-                                            <barButtonItem title="Play" image="play.fill" catalog="system" id="n86-ZF-eeM">
-                                                <color key="tintColor" red="1" green="0.19045169319999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </barButtonItem>
-                                            <barButtonItem style="plain" systemItem="flexibleSpace" id="R01-K4-7rX"/>
                                             <barButtonItem title="Like" image="heart.fill" catalog="system" id="tmv-Hl-hbm">
                                                 <color key="tintColor" red="1" green="0.19045169319999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </barButtonItem>
@@ -343,9 +380,24 @@
                                     </toolbar>
                                 </subviews>
                                 <color key="backgroundColor" red="0.89774589952894612" green="1" blue="0.9787602375098029" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="ckU-J5-3Wy" firstAttribute="leading" secondItem="nM3-FF-PWp" secondAttribute="leading" id="6Ep-of-mMu"/>
+                                    <constraint firstItem="O2L-gs-lTd" firstAttribute="top" secondItem="nM3-FF-PWp" secondAttribute="top" id="9Vp-xh-sUM"/>
+                                    <constraint firstAttribute="bottom" secondItem="O2L-gs-lTd" secondAttribute="bottom" id="M4J-du-oaM"/>
+                                    <constraint firstAttribute="trailing" secondItem="ckU-J5-3Wy" secondAttribute="trailing" id="P5b-lE-C2a"/>
+                                    <constraint firstAttribute="bottom" secondItem="ckU-J5-3Wy" secondAttribute="bottom" id="R3a-vO-Xp0"/>
+                                    <constraint firstItem="O2L-gs-lTd" firstAttribute="leading" secondItem="nM3-FF-PWp" secondAttribute="leading" id="aql-e3-eib"/>
+                                    <constraint firstAttribute="trailing" secondItem="O2L-gs-lTd" secondAttribute="trailing" id="fSw-6N-eLl"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="nM3-FF-PWp" firstAttribute="top" secondItem="8qd-Yy-qr1" secondAttribute="topMargin" constant="-44" id="2Qk-xC-PLe"/>
+                            <constraint firstItem="nM3-FF-PWp" firstAttribute="centerX" secondItem="8qd-Yy-qr1" secondAttribute="centerX" id="3TY-cH-cy5"/>
+                            <constraint firstItem="nM3-FF-PWp" firstAttribute="leading" secondItem="JlP-Sp-g71" secondAttribute="leading" id="N1X-eT-ULe"/>
+                            <constraint firstItem="nM3-FF-PWp" firstAttribute="centerY" secondItem="8qd-Yy-qr1" secondAttribute="centerY" id="XQ2-jD-9gG"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="JlP-Sp-g71"/>
                     </view>
                     <connections>
@@ -354,7 +406,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U1p-Nu-rNC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4272.463768115942" y="773.4375"/>
+            <point key="canvasLocation" x="4271.0144927536239" y="773.4375"/>
         </scene>
         <!--Favourite-->
         <scene sceneID="ggj-ZA-Tml">
@@ -512,7 +564,6 @@
         <image name="bin.xmark.fill" catalog="system" width="128" height="93"/>
         <image name="camera.fill" catalog="system" width="128" height="96"/>
         <image name="cloud.fill" catalog="system" width="128" height="84"/>
-        <image name="equal.circle.fill" catalog="system" width="128" height="121"/>
         <image name="heart.fill" catalog="system" width="128" height="109"/>
         <image name="photo-1517594422361-5eeb8ae275a9" width="1000" height="667"/>
         <image name="play.fill" catalog="system" width="116" height="128"/>
