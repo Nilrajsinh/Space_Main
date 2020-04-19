@@ -257,23 +257,24 @@
                                     <rect key="frame" x="0.0" y="0.0" width="135" height="135"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo-1517594422361-5eeb8ae275a9" translatesAutoresizingMaskIntoConstraints="NO" id="w6O-Nd-Qh6">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fEk-YB-F9Q" customClass="PlayerView" customModule="Space" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="135" height="135"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" secondItem="w6O-Nd-Qh6" secondAttribute="height" multiplier="1:1" id="jNn-Zb-cfG"/>
+                                                <constraint firstAttribute="width" secondItem="fEk-YB-F9Q" secondAttribute="height" multiplier="1:1" id="eB8-Sr-VYY"/>
                                             </constraints>
-                                        </imageView>
+                                        </view>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="w6O-Nd-Qh6" firstAttribute="top" secondItem="roV-iX-tua" secondAttribute="top" id="H7i-NB-wwy"/>
-                                        <constraint firstItem="w6O-Nd-Qh6" firstAttribute="leading" secondItem="roV-iX-tua" secondAttribute="leading" id="Kge-lO-xHJ"/>
-                                        <constraint firstAttribute="bottom" secondItem="w6O-Nd-Qh6" secondAttribute="bottom" id="uox-6j-ZPI"/>
-                                        <constraint firstAttribute="trailing" secondItem="w6O-Nd-Qh6" secondAttribute="trailing" id="xyB-QI-LoC"/>
+                                        <constraint firstAttribute="bottom" secondItem="fEk-YB-F9Q" secondAttribute="bottom" id="MJC-Qc-XEN"/>
+                                        <constraint firstItem="fEk-YB-F9Q" firstAttribute="top" secondItem="roV-iX-tua" secondAttribute="top" id="P8k-aA-lQ1"/>
+                                        <constraint firstItem="fEk-YB-F9Q" firstAttribute="leading" secondItem="roV-iX-tua" secondAttribute="leading" id="ifG-It-b9e"/>
+                                        <constraint firstAttribute="trailing" secondItem="fEk-YB-F9Q" secondAttribute="trailing" id="uZz-WK-wr2"/>
                                     </constraints>
                                 </collectionViewCellContentView>
                                 <size key="customSize" width="135" height="135"/>
                                 <connections>
-                                    <outlet property="VideoThumb" destination="w6O-Nd-Qh6" id="mst-WY-wtb"/>
+                                    <outlet property="Player" destination="fEk-YB-F9Q" id="1eq-ND-Dek"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -293,6 +294,67 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bew-jf-EoE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3523.1884057971015" y="771.42857142857144"/>
+        </scene>
+        <!--Full Screen Video-->
+        <scene sceneID="nYM-dV-nYx">
+            <objects>
+                <viewController id="pIY-WG-3R6" customClass="FullScreenVideo" customModule="Space" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8qd-Yy-qr1">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nM3-FF-PWp" customClass="PlayerView" customModule="Space" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ckU-J5-3Wy">
+                                        <rect key="frame" x="0.0" y="852" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <items>
+                                            <barButtonItem title="Save" image="square.and.arrow.down.fill" catalog="system" id="U1C-Rw-rcI">
+                                                <color key="tintColor" red="1" green="0.19045169319999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <connections>
+                                                    <action selector="Save:" destination="FfQ-ei-NPG" id="6iv-ZC-RJH"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem style="plain" systemItem="flexibleSpace" id="mIl-Bc-kbB"/>
+                                            <barButtonItem title="Share" image="arrowshape.turn.up.right.fill" catalog="system" id="10Q-pp-O6q">
+                                                <color key="tintColor" red="1" green="0.19045169319999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </barButtonItem>
+                                            <barButtonItem style="plain" systemItem="flexibleSpace" id="owd-7z-5q4"/>
+                                            <barButtonItem title="Pause" image="equal.circle.fill" catalog="system" id="E7U-2b-Km3">
+                                                <color key="tintColor" red="1" green="0.19045169319999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </barButtonItem>
+                                            <barButtonItem style="plain" systemItem="flexibleSpace" id="uz5-oG-6lt"/>
+                                            <barButtonItem title="Play" image="play.fill" catalog="system" id="n86-ZF-eeM">
+                                                <color key="tintColor" red="1" green="0.19045169319999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </barButtonItem>
+                                            <barButtonItem style="plain" systemItem="flexibleSpace" id="R01-K4-7rX"/>
+                                            <barButtonItem title="Like" image="heart.fill" catalog="system" id="tmv-Hl-hbm">
+                                                <color key="tintColor" red="1" green="0.19045169319999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </barButtonItem>
+                                            <barButtonItem style="plain" systemItem="flexibleSpace" id="oPD-ax-ZJW"/>
+                                            <barButtonItem title="Delete" image="bin.xmark.fill" catalog="system" id="gKk-Vo-KPd">
+                                                <color key="tintColor" red="1" green="0.19045169319999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </barButtonItem>
+                                        </items>
+                                        <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </toolbar>
+                                </subviews>
+                                <color key="backgroundColor" red="0.89774589952894612" green="1" blue="0.9787602375098029" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="JlP-Sp-g71"/>
+                    </view>
+                    <connections>
+                        <outlet property="Player" destination="nM3-FF-PWp" id="igm-DB-ghH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="U1p-Nu-rNC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4272.463768115942" y="773.4375"/>
         </scene>
         <!--Favourite-->
         <scene sceneID="ggj-ZA-Tml">
@@ -450,8 +512,10 @@
         <image name="bin.xmark.fill" catalog="system" width="128" height="93"/>
         <image name="camera.fill" catalog="system" width="128" height="96"/>
         <image name="cloud.fill" catalog="system" width="128" height="84"/>
+        <image name="equal.circle.fill" catalog="system" width="128" height="121"/>
         <image name="heart.fill" catalog="system" width="128" height="109"/>
         <image name="photo-1517594422361-5eeb8ae275a9" width="1000" height="667"/>
+        <image name="play.fill" catalog="system" width="116" height="128"/>
         <image name="plus.circle.fill" catalog="system" width="128" height="121"/>
         <image name="square.and.arrow.down.fill" catalog="system" width="121" height="128"/>
         <image name="suit.heart.fill" catalog="system" width="128" height="109"/>

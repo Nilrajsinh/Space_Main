@@ -10,7 +10,8 @@ import UIKit
 
 class VideoCell: UICollectionViewCell {
     
-    @IBOutlet weak var VideoThumb: UIImageView!
+
+    @IBOutlet weak var Player: PlayerView!
     
     
 }

@@ -21,6 +21,9 @@ class Video: UICollectionViewController,UIImagePickerControllerDelegate,UINaviga
     let imagePicker = UIImagePickerController()
       var ref: DatabaseReference!
     
+    
+    
+    
     @IBAction func addVideo(_ sender: Any) {
         let picker =  UIImagePickerController()
             picker.delegate = self
@@ -74,7 +77,17 @@ class Video: UICollectionViewController,UIImagePickerControllerDelegate,UINaviga
                                                         
                                                                return
                                                            }
+                                           
                                                            print(downloadURL)
+                                            let key = self.ref.child(appDelegate.loginUserID).child("Video").childByAutoId().key
+                                            let video = ["url":downloadURL.absoluteString]
+                                            
+                                            //To get Url
+                                            let childUpdate = ["/\(key ?? "")":video]
+                                            self.ref.updateChildValues(childUpdate)
+                                            
+                                            self.collectionView.reloadData()
+                                            
                                         }
                                            print("Video Upload Done")
                                       }
@@ -93,7 +106,25 @@ class Video: UICollectionViewController,UIImagePickerControllerDelegate,UINaviga
                                        print("Failed to upload video :",error)
                                    }
                                    else{
-                                        print("Video Upload Done")
+                                       videoref.downloadURL { (url, error) in
+                                                           guard let downloadURL = url else {
+                                                        
+                                                               return
+                                                           }
+                                      
+                                        
+                                                           print(downloadURL)
+                                            let key = self.ref.child(appDelegate.loginUserID).child("Video").childByAutoId().key
+                                            let video = ["url":downloadURL.absoluteString]
+                                            
+                                            //To get Url
+                                            let childUpdate = ["/\(key ?? "")":video]
+                                            self.ref.updateChildValues(childUpdate)
+                                            
+                                            self.collectionView.reloadData()
+                                            
+                                        }
+                                           print("Video Upload Done")
                                    }
                                   
                                }
@@ -112,21 +143,21 @@ class Video: UICollectionViewController,UIImagePickerControllerDelegate,UINaviga
         
     }
     
-//    func LoadVideo(){
-//
-//           ref.observe(DataEventType.value) { (snapshot) in
-//               var newImage = [Space_picture]()
-//
-//               for spacePic in snapshot.children {
-//                   let SpacePicObject = Space_picture(snapshot: spacePic as! DataSnapshot)
-//                   newImage.append(SpacePicObject)
-//               }
-//               self.Video = newImage
-//               self.collectionView.reloadData()
-//           }
-//
-//
-//       }
+    func LoadVideo(){
+
+           ref.observe(DataEventType.value) { (snapshot) in
+               var newImage = [Space_picture]()
+
+               for spacePic in snapshot.children {
+                   let SpacePicObject = Space_picture(snapshot: spacePic as! DataSnapshot)
+                   newImage.append(SpacePicObject)
+               }
+               self.Video = newImage
+               self.collectionView.reloadData()
+           }
+
+
+       }
     
     
 //    private func ThumbnailImageForVideoUrl(videourl:URL) -> UIImage{
@@ -156,23 +187,24 @@ class Video: UICollectionViewController,UIImagePickerControllerDelegate,UINaviga
            
        }
     
+    override func viewWillAppear(_ animated: Bool) {
+        tabBarController?.tabBar.isHidden = false
+        collectionView.reloadData()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+         ref = Database.database().reference().child(appDelegate.loginUserID).child("Video")
         
         var CustomImageFlow = FlowLayoutColllectionView()
             collectionView.collectionViewLayout = CustomImageFlow
             collectionView.backgroundColor =  .black
-            
-        
-        
-       // self.LoadVideo()
+         
+        self.LoadVideo()
        imagePicker.delegate = self
-        ref = Database.database().reference()
+        collectionView.reloadData()
         // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
+        
         // Do any additional setup after loading the view.
     }
 
@@ -182,19 +214,35 @@ class Video: UICollectionViewController,UIImagePickerControllerDelegate,UINaviga
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+           print(Video.count)
         // #warning Incomplete implementation, return the number of items
         return Video.count
-        print(Video.count)
+     
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        
+            
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! VideoCell
     
+        let url = Video[indexPath.row].url
+        
+        let vidUrl = URL(string: url!)
+        
+        let avplayer = AVPlayer(url: vidUrl as! URL )
+        
+      
+        cell.Player.PlayerLayer.player = avplayer
+        
+        cell.Player.player?.play()
+        cell.Player.player?.isMuted = true
+     
+        
         // Configure the cell
     
         return cell
