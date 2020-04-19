@@ -69,6 +69,13 @@ class Video: UICollectionViewController,UIImagePickerControllerDelegate,UINaviga
                                           print("Failed to upload video :",error)
                                       }
                                       else{
+                                        videoref.downloadURL { (url, error) in
+                                                           guard let downloadURL = url else {
+                                                        
+                                                               return
+                                                           }
+                                                           print(downloadURL)
+                                        }
                                            print("Video Upload Done")
                                       }
                                      
