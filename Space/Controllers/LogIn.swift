@@ -12,30 +12,50 @@ import GoogleSignIn
 
 class LogIn: UIViewController,GIDSignInDelegate {
     
-    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-        // ...
-        if let error = error {
-          // ...
-          return
+       func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+            if let err = error{
+                print("Fail To login ")
+                return
+            }
+                print("Successfully login Done")
+              guard let authentication = user.authentication else { return }
+
+            let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
+
+            Auth.auth().signIn(with: credential) { (user, error) in
+                if let err = error {
+                    print("Error")
+                }
+
+
+                appDelegate.loginUserID = user?.user.uid ?? ""
+                self.performSegue(withIdentifier: "Home", sender: nil)
+//                let vc = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "Home")
+//                let nav = UINavigationController(rootViewController: vc)
+
+                print("Done")
+            }
+
         }
 
-        guard let authentication = user.authentication else { return }
-        let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
-                                                          accessToken: authentication.accessToken)
-        
-       
-    }
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
  
+       if Auth.auth().currentUser?.uid != nil {
+                appDelegate.loginUserID = Auth.auth().currentUser?.uid as! String
+                    self.performSegue(withIdentifier: "Home", sender: nil)
+                  }
+        
         let googlebutton = GIDSignInButton()
+        googlebutton.layer.cornerRadius = 20
         googlebutton.frame = CGRect(x: 16, y: 116 + 66, width: view.frame.width - 32, height: 50)
         view.addSubview(googlebutton)
         
         Login.layer.cornerRadius = 20
-        
+        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
+        GIDSignIn.sharedInstance().delegate = self
        GIDSignIn.sharedInstance()?.presentingViewController = self
      //  GIDSignIn.sharedInstance().signIn()
         // Do any additional setup after loading the view.
@@ -50,6 +70,10 @@ class LogIn: UIViewController,GIDSignInDelegate {
             if error != nil {
                 print("Error")
             }
+            
+             UserDefaults.standard.set(true, forKey: "ISUSERLOGGEDIN")
+            UserDefaults.standard.synchronize()
+            
              appDelegate.loginUserID = user?.user.uid ?? ""
             self.performSegue(withIdentifier: "Home", sender: nil)
         }

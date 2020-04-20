@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="VUs-fA-n40">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
@@ -85,12 +85,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1078.2608695652175" y="113.16964285714285"/>
+            <point key="canvasLocation" x="1988.4057971014495" y="113.16964285714285"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--View Controller-->
         <scene sceneID="LLS-s5-Fjc">
             <objects>
-                <tabBarController id="PP2-B8-zHB" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="Home" useStoryboardIdentifierAsRestorationIdentifier="YES" id="PP2-B8-zHB" customClass="ViewController" customModule="Space" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" backgroundImage="photo-1517594422361-5eeb8ae275a9" id="xkC-wI-Ys3">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -107,7 +107,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1jB-wh-2id" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1863" y="114"/>
+            <point key="canvasLocation" x="2772.4637681159425" y="113.83928571428571"/>
         </scene>
         <!--Pictures-->
         <scene sceneID="YuZ-Nf-Wqt">
@@ -168,7 +168,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I54-fH-KPA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3528.985507246377" y="105.13392857142857"/>
+            <point key="canvasLocation" x="4439.130434782609" y="105.13392857142857"/>
         </scene>
         <!--Full Screen Pic-->
         <scene sceneID="B1d-fw-t9E">
@@ -183,7 +183,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="skF-c3-oF5">
-                                <rect key="frame" x="0.0" y="818" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <items>
                                     <barButtonItem title="Save" image="square.and.arrow.down.fill" catalog="system" id="xGT-f2-izk">
@@ -233,7 +233,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K1w-69-QwI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4302.898550724638" y="105.80357142857143"/>
+            <point key="canvasLocation" x="5213.04347826087" y="105.80357142857143"/>
         </scene>
         <!--Video-->
         <scene sceneID="hdE-tv-9Ys">
@@ -511,7 +511,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Slm-1b-OBQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2588" y="105.66502463054188"/>
+            <point key="canvasLocation" x="3497.1014492753625" y="105.13392857142857"/>
         </scene>
         <!--Video-->
         <scene sceneID="Ug3-fU-IHT">
@@ -558,9 +558,26 @@
             </objects>
             <point key="canvasLocation" x="2589.5999999999999" y="1426.8472906403942"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="fEi-Na-8kR">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="VUs-fA-n40" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Q2t-oa-Iv7">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="DJQ-yR-DjS"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zKt-Qi-zNd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1078.2608695652175" y="113.16964285714285"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="5aq-9a-SUe"/>
+        <segue reference="50u-ny-IMc"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Screenshot 2019-11-27 at 10.18.50 PM" width="309" height="323"/>
