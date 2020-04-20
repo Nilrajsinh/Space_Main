@@ -42,6 +42,10 @@ class LogIn: UIViewController,GIDSignInDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+         let tap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+                     
+                     view.addGestureRecognizer(tap)
  
        if Auth.auth().currentUser?.uid != nil {
                 appDelegate.loginUserID = Auth.auth().currentUser?.uid as! String
@@ -82,6 +86,11 @@ class LogIn: UIViewController,GIDSignInDelegate {
     @IBOutlet weak var Email: UITextField!
     @IBOutlet weak var Password: UITextField!
     
+    
+    @objc func dismissKeyboard() {
+                  view.endEditing(true)
+                 
+              }
     
 
 }

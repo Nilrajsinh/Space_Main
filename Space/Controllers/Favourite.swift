@@ -39,6 +39,13 @@ class Favourite: UICollectionViewController {
         collectionView.reloadData()
        
     }
+    
+    
+     override func viewWillAppear(_ animated: Bool) {
+           self.tabBarController?.tabBar.isHidden = false
+     }
+    
+    
     func loadDb(){
       
         ref.observe(DataEventType.value) { (snapshot) in
