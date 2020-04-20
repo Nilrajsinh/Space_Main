@@ -20,7 +20,7 @@ class FullScreenPic: UIViewController {
     
     var imageURL : String?
     
-
+   var  imgDataMain = Data()
     
   
     @IBAction func Save(_ sender: Any) {
@@ -72,7 +72,7 @@ class FullScreenPic: UIViewController {
         
                   let imageRef = Storage.storage().reference().child(appDelegate.loginUserID).child("LikedImages/" + randomstring(20))
                   
-                  _ = imageRef.putData(data, metadata: nil){ (metadata ,error) in
+                  _ = imageRef.putData(imgDataMain, metadata: nil){ (metadata ,error) in
                       guard let metadata = metadata else {
                           return
                       }

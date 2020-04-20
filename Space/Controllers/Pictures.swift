@@ -23,6 +23,8 @@ class Pictures: UICollectionViewController,UIImagePickerControllerDelegate,UINav
     var ref: DatabaseReference!
     var CustomImageFlow : FlowLayoutColllectionView!
    
+    
+    var imgData : Data!
     var Picturecollection = [""]
     
     @IBAction func AddBtn(_ sender: Any) {
@@ -49,6 +51,7 @@ class Pictures: UICollectionViewController,UIImagePickerControllerDelegate,UINav
             
             data = pickedimage.jpegData(compressionQuality: 0.8)!
             
+            self.imgData = data
             let imageRef = Storage.storage().reference().child(appDelegate.loginUserID).child("Images/" + randomstring(20))
             
             _ = imageRef.putData(data, metadata: nil){ (metadata ,error) in
@@ -152,7 +155,7 @@ class Pictures: UICollectionViewController,UIImagePickerControllerDelegate,UINav
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! PictureCell
        // cell.Picture.image = picture[indexPath.row]
     
-        cell.Picture.sd_setImage(with: URL(string: picture[indexPath.row].url), placeholderImage: #imageLiteral(resourceName: "photo-1517594422361-5eeb8ae275a9.jpg"))
+        cell.Picture.sd_setImage(with: URL(string: picture[indexPath.row].url), placeholderImage: #imageLiteral(resourceName: "crop.php"))
     
         return cell
     
@@ -162,6 +165,7 @@ class Pictures: UICollectionViewController,UIImagePickerControllerDelegate,UINav
    
         drawVC.imageURL = picture[indexPath.row].url
     
+        drawVC.imgDataMain = imgData
         // you can also pass string from array
         self.navigationController?.pushViewController(drawVC, animated: true)
     }

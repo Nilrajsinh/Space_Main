@@ -18,6 +18,7 @@ class Favourite: UICollectionViewController {
     
     var LikePic = [Space_picture]()
     
+   
     
     var ref: DatabaseReference!
        var CustomImageFlow : FlowLayoutColllectionView!
@@ -74,9 +75,18 @@ class Favourite: UICollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! LikedCell
               // cell.Picture.image = picture[indexPath.row]
            
-               cell.Picture.sd_setImage(with: URL(string: LikePic[indexPath.row].url), placeholderImage: #imageLiteral(resourceName: "photo-1517594422361-5eeb8ae275a9.jpg"))
+               cell.Picture.sd_setImage(with: URL(string: LikePic[indexPath.row].url), placeholderImage: #imageLiteral(resourceName: "crop.php"))
            
                return cell
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+         var drawVC  = self.storyboard?.instantiateViewController(withIdentifier: "DetailScene") as! FullScreenPic
+          
+               drawVC.imageURL = LikePic[indexPath.row].url
+           
+               // you can also pass string from array
+               self.navigationController?.pushViewController(drawVC, animated: true)
     }
     
    
