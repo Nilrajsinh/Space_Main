@@ -165,8 +165,12 @@ class Pictures: UICollectionViewController,UIImagePickerControllerDelegate,UINav
    
         drawVC.imageURL = picture[indexPath.row].url
     
-        drawVC.imgDataMain = imgData
-        // you can also pass string from array
+        
+        //Error Error
+        
+       // drawVC.imgDataMain = imgData
+        
+        
         self.navigationController?.pushViewController(drawVC, animated: true)
     }
 
