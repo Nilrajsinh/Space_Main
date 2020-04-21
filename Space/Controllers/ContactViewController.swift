@@ -8,11 +8,13 @@
 
 import UIKit
 import Firebase
+import GoogleMobileAds
 
-class ContactViewController: UIViewController {
+
+class ContactViewController: UIViewController,GADBannerViewDelegate {
 
      var ref: DatabaseReference!
-    
+     var bannerView: GADBannerView!
     
     @IBOutlet weak var TextField: UITextField!
     
@@ -35,10 +37,41 @@ class ContactViewController: UIViewController {
                        }
         
     }
+    func addBannerViewToView(_ bannerView: GADBannerView) {
+          bannerView.frame = CGRect(x: 0, y: (view.bounds.height - bannerView.frame.size.height) - 49, width: self.view.bounds.size.width, height: 49)
+       bannerView.translatesAutoresizingMaskIntoConstraints = false
+       view.addSubview(bannerView)
+       view.addConstraints(
+          
+         [NSLayoutConstraint(item: bannerView,
+                             attribute: .bottom,
+                             relatedBy: .equal,
+                             toItem: bottomLayoutGuide,
+                             attribute: .top,
+                             multiplier: 1,
+                             constant: 0),
+          NSLayoutConstraint(item: bannerView,
+                             attribute: .centerX,
+                             relatedBy: .equal,
+                             toItem: view,
+                             attribute: .centerX,
+                             multiplier: 1,
+                             constant: 0)
+         ])
+      }
+      
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        bannerView = GADBannerView(adSize: kGADAdSizeBanner)
+
+              addBannerViewToView(bannerView)
+            bannerView.adUnitID = "ca-app-pub-4454896708430305/6275341843"
+             bannerView.rootViewController = self
+            bannerView.load(GADRequest())
+              bannerView.delegate = self
         
   ref = Database.database().reference()
         

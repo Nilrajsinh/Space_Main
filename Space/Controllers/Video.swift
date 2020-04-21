@@ -10,21 +10,27 @@ import UIKit
 import MobileCoreServices
 import AVFoundation
 import Firebase
+import GoogleMobileAds
 
 private let reuseIdentifier = "Cell"
 
-class Video: UICollectionViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+class Video: UICollectionViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate,GADBannerViewDelegate, GADInterstitialDelegate {
  
     var CustomImageFlow : FlowLayoutColllectionView!
     var Videost = [""]
     var Video = [Space_picture]()
     let imagePicker = UIImagePickerController()
       var ref: DatabaseReference!
+     var bannerView: GADBannerView!
     
-    
-    
+     var interstitial: GADInterstitial!
     
     @IBAction func addVideo(_ sender: Any) {
+        
+        if interstitial.isReady {
+          interstitial.present(fromRootViewController: self)
+        }
+        
         let picker =  UIImagePickerController()
             picker.delegate = self
             picker.allowsEditing = false
@@ -121,6 +127,10 @@ class Video: UICollectionViewController,UIImagePickerControllerDelegate,UINaviga
                                             let childUpdate = ["/\(key ?? "")":video]
                                             self.ref.updateChildValues(childUpdate)
                                             
+                                        if self.interstitial.isReady {
+                                            self.interstitial.present(fromRootViewController: self)
+                                        }
+                                        
                                             self.collectionView.reloadData()
                                             
                                         }
@@ -192,9 +202,60 @@ class Video: UICollectionViewController,UIImagePickerControllerDelegate,UINaviga
         
     }
     
+    func addBannerViewToView(_ bannerView: GADBannerView) {
+          bannerView.frame = CGRect(x: 0, y: (view.bounds.height - bannerView.frame.size.height) - 49, width: self.view.bounds.size.width, height: 49)
+       bannerView.translatesAutoresizingMaskIntoConstraints = false
+       view.addSubview(bannerView)
+       view.addConstraints(
+          
+         [NSLayoutConstraint(item: bannerView,
+                             attribute: .bottom,
+                             relatedBy: .equal,
+                             toItem: bottomLayoutGuide,
+                             attribute: .top,
+                             multiplier: 1,
+                             constant: 0),
+          NSLayoutConstraint(item: bannerView,
+                             attribute: .centerX,
+                             relatedBy: .equal,
+                             toItem: view,
+                             attribute: .centerX,
+                             multiplier: 1,
+                             constant: 0)
+         ])
+      }
+      
+    func createAndLoadInterstitial() -> GADInterstitial {
+         var interstitial = GADInterstitial(adUnitID: "ca-app-pub-4454896708430305/7246283364")
+         interstitial.delegate = self
+         interstitial.load(GADRequest())
+         return interstitial
+       }
+
+       func interstitialDidDismissScreen(_ ad: GADInterstitial) {
+         interstitial = createAndLoadInterstitial()
+       }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
          ref = Database.database().reference().child(appDelegate.loginUserID).child("Video")
+        
+        
+        bannerView = GADBannerView(adSize: kGADAdSizeBanner)
+
+              addBannerViewToView(bannerView)
+            bannerView.adUnitID = "ca-app-pub-4454896708430305/6275341843"
+             bannerView.rootViewController = self
+            bannerView.load(GADRequest())
+              bannerView.delegate = self
+        
+        
+        interstitial = GADInterstitial(adUnitID: "ca-app-pub-4454896708430305/7246283364")
+                  let request = GADRequest()
+                  interstitial.load(request)
+              interstitial = createAndLoadInterstitial()
+              interstitial.delegate = self
+        
         
         var CustomImageFlow = FlowLayoutColllectionView()
             collectionView.collectionViewLayout = CustomImageFlow
@@ -253,7 +314,11 @@ class Video: UICollectionViewController,UIImagePickerControllerDelegate,UINaviga
       
         let url = Video[indexPath.row].url
         
-      
+      if interstitial.isReady {
+        interstitial.present(fromRootViewController: self)
+      }
+          
+        
         drawVC.url = url!
             
              self.navigationController?.pushViewController(drawVC, animated: true)
