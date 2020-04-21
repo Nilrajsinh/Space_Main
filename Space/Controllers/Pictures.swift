@@ -115,7 +115,7 @@ class Pictures: UICollectionViewController,UIImagePickerControllerDelegate,UINav
         
         var CustomImageFlow = FlowLayoutColllectionView()
         collectionView.collectionViewLayout = CustomImageFlow
-        collectionView.backgroundColor =  .black
+        
         
         
         // Do any additional setup after loading the view.

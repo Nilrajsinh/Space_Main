@@ -198,7 +198,7 @@ class Video: UICollectionViewController,UIImagePickerControllerDelegate,UINaviga
         
         var CustomImageFlow = FlowLayoutColllectionView()
             collectionView.collectionViewLayout = CustomImageFlow
-            collectionView.backgroundColor =  .black
+         
          
         self.LoadVideo()
        imagePicker.delegate = self

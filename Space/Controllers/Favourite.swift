@@ -34,7 +34,7 @@ class Favourite: UICollectionViewController {
                
                var CustomImageFlow = FlowLayoutColllectionView()
                collectionView.collectionViewLayout = CustomImageFlow
-               collectionView.backgroundColor =  .black
+             
         
         collectionView.reloadData()
        

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class Settings: UIViewController {
     
@@ -29,6 +30,12 @@ class Settings: UIViewController {
         
        }
     @IBAction func LogOut(_ sender: Any) {
+        
+        try! Auth.auth().signOut()
+
+        if let storyboard = self.storyboard {
+            self.performSegue(withIdentifier: "BackLogin", sender: self)
+                }
         
         
        }
