@@ -22,6 +22,7 @@ class FullScreenPic: UIViewController {
     
    var  imgDataMain = Data()
     
+    
   
     @IBAction func Save(_ sender: Any) {
         
@@ -102,16 +103,32 @@ class FullScreenPic: UIViewController {
     @IBAction func DeletePic(_ sender: Any) {
   
         
+        
+        
+        let key = self.ref.child(appDelegate.loginUserID).child("Images").childByAutoId().key
+        
         let deleteMess = Database.database().reference().child(appDelegate.loginUserID).child("Images")
-     print(deleteMess)
+    
+        
         
     }
     
     var dimg = UIImage()
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = true
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let tap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        
+      //  navigationController?.barHideOnTapGestureRecognizer
+        
+            view.addGestureRecognizer(tap)
+        
+        
         
         
       ref = Database.database().reference()
@@ -151,5 +168,17 @@ class FullScreenPic: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    
+    @IBOutlet weak var TooldBar: UIToolbar!
+    
+    
+    @objc func dismissKeyboard() {
+        navigationController?.navigationBar.isHidden = !((navigationController?.navigationBar.isHidden)!)
+        TooldBar.isHidden = !(TooldBar.isHidden)
+        
+        
+                  
+               }
 
 }

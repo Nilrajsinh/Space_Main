@@ -87,14 +87,14 @@ class Favourite: UICollectionViewController {
                return cell
     }
     
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-         var drawVC  = self.storyboard?.instantiateViewController(withIdentifier: "DetailScene") as! FullScreenPic
-          
-               drawVC.imageURL = LikePic[indexPath.row].url
-           
-               // you can also pass string from array
-               self.navigationController?.pushViewController(drawVC, animated: true)
-    }
+//    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//         var drawVC  = self.storyboard?.instantiateViewController(withIdentifier: "DetailScene") as! FullScreenPic
+//          
+//               drawVC.imageURL = LikePic[indexPath.row].url
+//
+//               // you can also pass string from array
+//               self.navigationController?.pushViewController(drawVC, animated: true)
+//    }
     
    
     // MARK: UICollectionViewDelegate

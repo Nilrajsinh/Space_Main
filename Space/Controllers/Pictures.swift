@@ -13,9 +13,9 @@ import SDWebImage
 
 
 
-
-
-class Pictures: UICollectionViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+class Pictures: UICollectionViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate, photodelegate {
+    
+  
     
     var picture = [Space_picture]()
     
@@ -26,6 +26,29 @@ class Pictures: UICollectionViewController,UIImagePickerControllerDelegate,UINav
     
     var imgData : Data!
     var Picturecollection = [""]
+    
+    
+    
+      func delete(cell: PictureCell) {
+          if let indexpath = collectionView.indexPath(for: cell) {
+              
+              //delete from database
+            Database.database().reference().child(appDelegate.loginUserID).child("Images")
+              
+                        self.picture.remove(at: indexpath.item)
+                        self.collectionView.deleteItems(at: [indexpath])
+             
+           
+            }
+        
+          
+      }
+      
+    
+    
+    
+
+    @IBOutlet weak var AddbtnOut: UIBarButtonItem!
     
     @IBAction func AddBtn(_ sender: Any) {
         let picker =  UIImagePickerController()
@@ -66,6 +89,7 @@ class Pictures: UICollectionViewController,UIImagePickerControllerDelegate,UINav
                         return
                     }
                     print(downloadURL)
+                    
                     let key = self.ref.child(appDelegate.loginUserID).child("Images").childByAutoId().key
                     let image = ["url":downloadURL.absoluteString]
                     
@@ -103,6 +127,7 @@ class Pictures: UICollectionViewController,UIImagePickerControllerDelegate,UINav
     
     override func viewWillAppear(_ animated: Bool) {
           self.tabBarController?.tabBar.isHidden = false
+        self.navigationController?.navigationBar.isHidden = false
     }
 
     override func viewDidLoad() {
@@ -117,6 +142,7 @@ class Pictures: UICollectionViewController,UIImagePickerControllerDelegate,UINav
         collectionView.collectionViewLayout = CustomImageFlow
         
         
+        navigationItem.leftBarButtonItem = editButtonItem
         
         // Do any additional setup after loading the view.
     }
@@ -153,6 +179,13 @@ class Pictures: UICollectionViewController,UIImagePickerControllerDelegate,UINav
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! PictureCell
+        
+        cell.DeleteBackground.layer.cornerRadius = cell.DeleteBackground.bounds.width / 2.0
+        cell.DeleteBackground.layer.masksToBounds = true
+        cell.delegate = self
+        cell.DeleteBackground.isHidden = !isEditing
+  
+        
        // cell.Picture.image = picture[indexPath.row]
     
         cell.Picture.sd_setImage(with: URL(string: picture[indexPath.row].url), placeholderImage: #imageLiteral(resourceName: "crop.php"))
@@ -160,6 +193,27 @@ class Pictures: UICollectionViewController,UIImagePickerControllerDelegate,UINav
         return cell
     
     }
+    
+    
+    //MARK: - Delete picture from collection view
+    
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        
+        AddbtnOut.isEnabled = !editing
+        if let indexpaths = collectionView?.indexPathsForVisibleItems{
+            for indexpath in indexpaths {
+                if let cell = collectionView.cellForItem(at: indexpath) as? PictureCell {
+                    cell.isEditing = editing
+                    
+                }
+            }
+        }
+        
+    }
+    
+    
+    
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
        var drawVC  = self.storyboard?.instantiateViewController(withIdentifier: "DetailScene") as! FullScreenPic
    
@@ -168,7 +222,7 @@ class Pictures: UICollectionViewController,UIImagePickerControllerDelegate,UINav
         
         //Error Error
         
-       // drawVC.imgDataMain = imgData
+//        drawVC.imgDataMain = imgData
         
         
         self.navigationController?.pushViewController(drawVC, animated: true)

@@ -30,6 +30,11 @@ class FullScreenVideo: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
+        
+        
+        
 //        let vidUrl = URL(string: url)
 //
 //              let avplayer = AVPlayer(url: vidUrl as! URL )

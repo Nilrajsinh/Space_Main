@@ -80,7 +80,7 @@
                         <outlet property="Email" destination="tx7-Vq-Vaf" id="aWj-24-gqR"/>
                         <outlet property="Login" destination="DdV-Da-vRi" id="ZT2-4O-5Rs"/>
                         <outlet property="Password" destination="wbc-PZ-bSJ" id="Tjb-8w-6sR"/>
-                        <segue destination="PP2-B8-zHB" kind="presentation" identifier="Home" modalPresentationStyle="fullScreen" modalTransitionStyle="partialCurl" id="Mu9-YY-BGU"/>
+                        <segue destination="PP2-B8-zHB" kind="presentation" identifier="Home" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="Mu9-YY-BGU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -140,14 +140,45 @@
                                                 <constraint firstAttribute="height" constant="137" id="TBe-en-YaH"/>
                                             </constraints>
                                         </imageView>
+                                        <visualEffectView opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JPL-eg-g3D">
+                                            <rect key="frame" x="8" y="8" width="19" height="27"/>
+                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="xgh-Yy-Tpw">
+                                                <rect key="frame" x="0.0" y="0.0" width="19" height="27"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xnt-Wx-CCg">
+                                                        <rect key="frame" x="-2" y="-1" width="24" height="28"/>
+                                                        <color key="tintColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <state key="normal" image="bin.xmark.fill" catalog="system"/>
+                                                        <connections>
+                                                            <action selector="DeleteButton:" destination="aJN-0B-Nus" eventType="touchUpInside" id="NYf-Hd-2xT"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="Xnt-Wx-CCg" firstAttribute="leading" secondItem="xgh-Yy-Tpw" secondAttribute="leading" constant="-2" id="31F-vS-S7K"/>
+                                                    <constraint firstItem="Xnt-Wx-CCg" firstAttribute="centerX" secondItem="xgh-Yy-Tpw" secondAttribute="centerX" id="ONm-lC-HjE"/>
+                                                    <constraint firstItem="Xnt-Wx-CCg" firstAttribute="top" secondItem="xgh-Yy-Tpw" secondAttribute="top" constant="-1" id="RIZ-55-XrO"/>
+                                                    <constraint firstItem="Xnt-Wx-CCg" firstAttribute="centerY" secondItem="xgh-Yy-Tpw" secondAttribute="centerY" id="o0w-fC-Ybx"/>
+                                                </constraints>
+                                            </view>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="19" id="0QQ-2g-ini"/>
+                                            </constraints>
+                                            <blurEffect style="light"/>
+                                        </visualEffectView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="cMw-cu-d8n" firstAttribute="centerY" secondItem="ag4-AI-Wxo" secondAttribute="centerY" constant="4.5" id="6pQ-LJ-Qbs"/>
+                                        <constraint firstItem="JPL-eg-g3D" firstAttribute="leading" secondItem="ag4-AI-Wxo" secondAttribute="leading" constant="8" id="7fA-kW-Y9k"/>
+                                        <constraint firstAttribute="bottom" secondItem="JPL-eg-g3D" secondAttribute="bottom" constant="93" id="JmU-jM-6bD"/>
+                                        <constraint firstItem="JPL-eg-g3D" firstAttribute="top" secondItem="ag4-AI-Wxo" secondAttribute="top" constant="8" id="jp5-7P-R2b"/>
                                         <constraint firstItem="cMw-cu-d8n" firstAttribute="centerX" secondItem="ag4-AI-Wxo" secondAttribute="centerX" constant="4.5" id="xye-lO-Ycf"/>
                                     </constraints>
                                 </collectionViewCellContentView>
                                 <size key="customSize" width="128" height="128"/>
                                 <connections>
+                                    <outlet property="DeleteBackground" destination="JPL-eg-g3D" id="Ty6-Jk-CLv"/>
                                     <outlet property="Picture" destination="cMw-cu-d8n" id="LDW-oY-k84"/>
                                 </connections>
                             </collectionViewCell>
@@ -166,6 +197,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="AddbtnOut" destination="7rJ-v3-092" id="BcV-R2-22A"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I54-fH-KPA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -179,13 +213,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="crop.php" translatesAutoresizingMaskIntoConstraints="NO" id="hJQ-46-zt9">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="crop.php" translatesAutoresizingMaskIntoConstraints="NO" id="hJQ-46-zt9">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="skF-c3-oF5">
                                 <rect key="frame" x="0.0" y="813" width="414" height="49"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <items>
                                     <barButtonItem title="Save" image="square.and.arrow.down.fill" catalog="system" id="xGT-f2-izk">
                                         <color key="tintColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -207,13 +241,6 @@
                                             <action selector="LikePic:" destination="FfQ-ei-NPG" id="uEh-yI-Tyw"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="hNe-V2-jNI"/>
-                                    <barButtonItem image="bin.xmark.fill" catalog="system" id="2ym-a8-Oes">
-                                        <color key="tintColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <connections>
-                                            <action selector="DeletePic:" destination="FfQ-ei-NPG" id="sqC-Tv-LKG"/>
-                                        </connections>
-                                    </barButtonItem>
                                 </items>
                                 <color key="tintColor" red="1" green="0.19045169319999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -233,6 +260,7 @@
                     </view>
                     <connections>
                         <outlet property="FullImage" destination="hJQ-46-zt9" id="xCc-wH-ANV"/>
+                        <outlet property="TooldBar" destination="skF-c3-oF5" id="zWF-WZ-64B"/>
                         <segue destination="NrG-sE-HBc" kind="presentation" identifier="Back" modalPresentationStyle="fullScreen" id="5aq-9a-SUe"/>
                     </connections>
                 </viewController>
@@ -367,10 +395,6 @@
                                                         </barButtonItem>
                                                         <barButtonItem style="plain" systemItem="flexibleSpace" id="uz5-oG-6lt"/>
                                                         <barButtonItem title="Like" image="heart.fill" catalog="system" id="tmv-Hl-hbm">
-                                                            <color key="tintColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        </barButtonItem>
-                                                        <barButtonItem style="plain" systemItem="flexibleSpace" id="oPD-ax-ZJW"/>
-                                                        <barButtonItem title="Delete" image="bin.xmark.fill" catalog="system" id="gKk-Vo-KPd">
                                                             <color key="tintColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </barButtonItem>
                                                     </items>

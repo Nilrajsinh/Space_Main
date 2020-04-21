@@ -8,14 +8,43 @@
 
 import UIKit
 
+
+protocol photodelegate: class {
+    
+    func delete(cell:PictureCell)
+}
+
 class PictureCell: UICollectionViewCell {
     
     
+    weak var delegate:photodelegate!
+    
+    
     @IBOutlet weak var Picture: UIImageView!
+    @IBOutlet weak var DeleteBackground: UIVisualEffectView!
+    
+    
+    
+    @IBAction func DeleteButton(_ sender: Any) {
+        
+        delegate.delete(cell: self)
+    }
+    
+    var isEditing:Bool = false {
+           didSet {
+            DeleteBackground.isHidden = !isEditing
+            
+               
+           }
+       }
+    
+   
+    
     
     override func prepareForReuse() {
         super.prepareForReuse()
         self.Picture.image = nil
         
+       
     }
 }
