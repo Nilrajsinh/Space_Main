@@ -12,7 +12,7 @@ import Firebase
 import GoogleMobileAds
 
 
-class FullScreenPic: UIViewController,GADBannerViewDelegate {
+class FullScreenPic: UIViewController,GADBannerViewDelegate,GADInterstitialDelegate {
 
     @IBOutlet weak var FullImage: UIImageView!
      var ref: DatabaseReference!
@@ -26,7 +26,26 @@ class FullScreenPic: UIViewController,GADBannerViewDelegate {
      var bannerView: GADBannerView!
     
   
+    
+      
+    var interstitial: GADInterstitial!
+    
+    func createAndLoadInterstitial() -> GADInterstitial {
+        var interstitial = GADInterstitial(adUnitID: "ca-app-pub-4454896708430305/7246283364")
+        interstitial.delegate = self
+        interstitial.load(GADRequest())
+        return interstitial
+      }
+
+      func interstitialDidDismissScreen(_ ad: GADInterstitial) {
+        interstitial = createAndLoadInterstitial()
+      }
+    
+    
     @IBAction func Save(_ sender: Any) {
+        if interstitial.isReady {
+             interstitial.present(fromRootViewController: self)
+           }
         
    
                  let alert = UIAlertController(title: "Save", message: "Would you like to save photo??", preferredStyle: .alert)
@@ -44,6 +63,10 @@ class FullScreenPic: UIViewController,GADBannerViewDelegate {
     }
     
     @IBAction func Share(_ sender: Any) {
+        if interstitial.isReady {
+             interstitial.present(fromRootViewController: self)
+           }
+        
         
         let activityVC = UIActivityViewController(activityItems: [FullImage.image], applicationActivities: nil)
               activityVC.popoverPresentationController?.sourceView = self.view
@@ -70,6 +93,10 @@ class FullScreenPic: UIViewController,GADBannerViewDelegate {
     
     @IBAction func LikePic(_ sender: Any) {
         var data = Data()
+        
+        if interstitial.isReady {
+             interstitial.present(fromRootViewController: self)
+           }
                   
         data = Data(imageURL!.utf8)
         
@@ -104,7 +131,9 @@ class FullScreenPic: UIViewController,GADBannerViewDelegate {
     
     @IBAction func DeletePic(_ sender: Any) {
   
-        
+        if interstitial.isReady {
+             interstitial.present(fromRootViewController: self)
+           }
         
         
         let key = self.ref.child(appDelegate.loginUserID).child("Images").childByAutoId().key
@@ -123,26 +152,10 @@ class FullScreenPic: UIViewController,GADBannerViewDelegate {
     
     
     func addBannerViewToView(_ bannerView: GADBannerView) {
-          bannerView.frame = CGRect(x: 0, y: (view.bounds.height - bannerView.frame.size.height) - 49, width: self.view.bounds.size.width, height: 49)
+          bannerView.frame = CGRect(x: 0, y: (view.bounds.height - bannerView.frame.size.height) - 100, width: self.view.bounds.size.width, height: 49)
        bannerView.translatesAutoresizingMaskIntoConstraints = false
        view.addSubview(bannerView)
-       view.addConstraints(
-          
-         [NSLayoutConstraint(item: bannerView,
-                             attribute: .bottom,
-                             relatedBy: .equal,
-                             toItem: bottomLayoutGuide,
-                             attribute: .top,
-                             multiplier: 1,
-                             constant: 0),
-          NSLayoutConstraint(item: bannerView,
-                             attribute: .centerX,
-                             relatedBy: .equal,
-                             toItem: view,
-                             attribute: .centerX,
-                             multiplier: 1,
-                             constant: 0)
-         ])
+       
       }
       
     
@@ -158,11 +171,15 @@ class FullScreenPic: UIViewController,GADBannerViewDelegate {
               bannerView.load(GADRequest())
                 bannerView.delegate = self
         
-        let tap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+       
         
       //  navigationController?.barHideOnTapGestureRecognizer
-        
-            view.addGestureRecognizer(tap)
+        interstitial = GADInterstitial(adUnitID: "ca-app-pub-4454896708430305/7246283364")
+                 let request = GADRequest()
+                 interstitial.load(request)
+             interstitial = createAndLoadInterstitial()
+             interstitial.delegate = self
+            
         
         
         
@@ -206,16 +223,10 @@ class FullScreenPic: UIViewController,GADBannerViewDelegate {
     */
     
     
-    @IBOutlet weak var TooldBar: UIToolbar!
+  
     
     
-    @objc func dismissKeyboard() {
-        navigationController?.navigationBar.isHidden = !((navigationController?.navigationBar.isHidden)!)
-        TooldBar.isHidden = !(TooldBar.isHidden)
-        
-        
-                  
-               }
+   
 
     
     

@@ -25,12 +25,12 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Demo@gmail.com" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tx7-Vq-Vaf">
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tx7-Vq-Vaf">
                                             <rect key="frame" x="10" y="305" width="398" height="34"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" textContentType="email"/>
                                         </textField>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="123456" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wbc-PZ-bSJ">
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wbc-PZ-bSJ">
                                             <rect key="frame" x="10" y="355" width="398" height="34"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
@@ -224,7 +224,7 @@
                                     <barButtonItem title="Save" image="square.and.arrow.down.fill" catalog="system" id="xGT-f2-izk">
                                         <color key="tintColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
-                                            <action selector="Save:" destination="FfQ-ei-NPG" id="osb-mR-mQJ"/>
+                                            <action selector="Save:" destination="FfQ-ei-NPG" id="0wd-y0-rr5"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="39y-eD-Gg9"/>
@@ -260,7 +260,6 @@
                     </view>
                     <connections>
                         <outlet property="FullImage" destination="hJQ-46-zt9" id="xCc-wH-ANV"/>
-                        <outlet property="TooldBar" destination="skF-c3-oF5" id="zWF-WZ-64B"/>
                         <segue destination="NrG-sE-HBc" kind="presentation" identifier="Back" modalPresentationStyle="fullScreen" id="5aq-9a-SUe"/>
                     </connections>
                 </viewController>
@@ -271,7 +270,6 @@
         <!--Video-->
         <scene sceneID="hdE-tv-9Ys">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bew-jf-EoE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <collectionViewController id="fHD-kW-RYo" customClass="Video" customModule="Space" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="CP5-za-jcd">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -325,6 +323,7 @@
                         </barButtonItem>
                     </navigationItem>
                 </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bew-jf-EoE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3523.1884057971015" y="771.42857142857144"/>
         </scene>

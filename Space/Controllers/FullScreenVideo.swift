@@ -9,11 +9,13 @@
 import UIKit
 import AVFoundation
 import AVKit
+import GoogleMobileAds
 
-class FullScreenVideo: UIViewController {
+class FullScreenVideo: UIViewController,GADInterstitialDelegate {
     
     var selectedVideo = [""]
-    
+      
+    var interstitial: GADInterstitial!
    
     var url = String()
     var playerLayer: AVPlayerLayer?
@@ -26,11 +28,28 @@ class FullScreenVideo: UIViewController {
         tabBarController?.tabBar.isHidden = true
     
     }
+    
+    
+    func createAndLoadInterstitial() -> GADInterstitial {
+        var interstitial = GADInterstitial(adUnitID: "ca-app-pub-4454896708430305/7246283364")
+        interstitial.delegate = self
+        interstitial.load(GADRequest())
+        return interstitial
+      }
+
+      func interstitialDidDismissScreen(_ ad: GADInterstitial) {
+        interstitial = createAndLoadInterstitial()
+      }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        interstitial = GADInterstitial(adUnitID: "ca-app-pub-4454896708430305/7246283364")
+                 let request = GADRequest()
+                 interstitial.load(request)
+             interstitial = createAndLoadInterstitial()
+             interstitial.delegate = self
         
         
         
@@ -54,6 +73,10 @@ class FullScreenVideo: UIViewController {
     
     @IBAction func Play(_ sender: Any) {
         
+        if interstitial.isReady {
+             interstitial.present(fromRootViewController: self)
+           }
+        
          let vidUrl = URL(string: url)
         
         let avplayer = AVPlayer(url: vidUrl as! URL )
@@ -71,6 +94,9 @@ class FullScreenVideo: UIViewController {
     
     @IBAction func Share(_ sender: Any) {
            
+        if interstitial.isReady {
+             interstitial.present(fromRootViewController: self)
+           }
         
         let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
                         activityVC.popoverPresentationController?.sourceView = self.view

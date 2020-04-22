@@ -15,6 +15,7 @@ import GoogleMobileAds
 
 class Pictures: UICollectionViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate, photodelegate,GADBannerViewDelegate, GADInterstitialDelegate {
     
+
   var bannerView: GADBannerView!
     
     
