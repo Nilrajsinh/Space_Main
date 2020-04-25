@@ -42,6 +42,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any])
       -> Bool {
+        let result = GIDSignIn.sharedInstance()?.handle(url)
+        return result!
       return GIDSignIn.sharedInstance().handle(url)
     }
     

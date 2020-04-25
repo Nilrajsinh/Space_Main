@@ -43,9 +43,7 @@ class FullScreenPic: UIViewController,GADBannerViewDelegate,GADInterstitialDeleg
     
     
     @IBAction func Save(_ sender: Any) {
-        if interstitial.isReady {
-             interstitial.present(fromRootViewController: self)
-           }
+       
         
    
                  let alert = UIAlertController(title: "Save", message: "Would you like to save photo??", preferredStyle: .alert)
@@ -57,20 +55,25 @@ class FullScreenPic: UIViewController,GADBannerViewDelegate,GADInterstitialDeleg
                  alert.addAction(cancel)
                  alert.addAction(yeah)
                  self.present(alert, animated: true, completion: nil)
+        if interstitial.isReady {
+                    interstitial.present(fromRootViewController: self)
+                  }
+        
             
         
         
     }
     
     @IBAction func Share(_ sender: Any) {
-        if interstitial.isReady {
-             interstitial.present(fromRootViewController: self)
-           }
+     
         
         
         let activityVC = UIActivityViewController(activityItems: [FullImage.image], applicationActivities: nil)
               activityVC.popoverPresentationController?.sourceView = self.view
               present(activityVC ,animated : true ,completion : nil)
+        if interstitial.isReady {
+                  interstitial.present(fromRootViewController: self)
+                }
         
     }
     

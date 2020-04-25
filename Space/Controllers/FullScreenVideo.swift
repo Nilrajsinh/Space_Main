@@ -73,9 +73,7 @@ class FullScreenVideo: UIViewController,GADInterstitialDelegate {
     
     @IBAction func Play(_ sender: Any) {
         
-        if interstitial.isReady {
-             interstitial.present(fromRootViewController: self)
-           }
+      
         
          let vidUrl = URL(string: url)
         
@@ -86,6 +84,9 @@ class FullScreenVideo: UIViewController,GADInterstitialDelegate {
         videoplayer.player = avplayer
         self.present(videoplayer, animated: true , completion: {
             avplayer.play()
+            if self.interstitial.isReady {
+                self.interstitial.present(fromRootViewController: self)
+                     }
         })
         
     }
@@ -94,13 +95,14 @@ class FullScreenVideo: UIViewController,GADInterstitialDelegate {
     
     @IBAction func Share(_ sender: Any) {
            
-        if interstitial.isReady {
-             interstitial.present(fromRootViewController: self)
-           }
+      
         
         let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
                         activityVC.popoverPresentationController?.sourceView = self.view
                         present(activityVC ,animated : true ,completion : nil)
+        if interstitial.isReady {
+                   interstitial.present(fromRootViewController: self)
+                 }
            
        }
     

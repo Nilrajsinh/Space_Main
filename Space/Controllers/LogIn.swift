@@ -13,8 +13,11 @@ import GoogleSignIn
 class LogIn: UIViewController,GIDSignInDelegate {
     
        func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        
+        
+        
             if let err = error{
-                print("Fail To login ")
+                print("Fail To login",err)
                 return
             }
                 print("Successfully login Done")
@@ -46,33 +49,56 @@ class LogIn: UIViewController,GIDSignInDelegate {
          let tap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
                      
                      view.addGestureRecognizer(tap)
- 
-       if Auth.auth().currentUser?.uid != nil {
-                appDelegate.loginUserID = Auth.auth().currentUser?.uid as! String
-                    self.performSegue(withIdentifier: "Home", sender: nil)
-                  }
+
+//        let googlebutton = GIDSignInButton()
+//        googlebutton.layer.cornerRadius = 20
+//        googlebutton.frame = CGRect(x: 16, y: 116 + 66, width: view.frame.width - 32, height: 50)
+//        view.addSubview(googlebutton)
         
-        let googlebutton = GIDSignInButton()
-        googlebutton.layer.cornerRadius = 20
-        googlebutton.frame = CGRect(x: 16, y: 116 + 66, width: view.frame.width - 32, height: 50)
-        view.addSubview(googlebutton)
+        
+        
+        
         
         Login.layer.cornerRadius = 20
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self
        GIDSignIn.sharedInstance()?.presentingViewController = self
-     //  GIDSignIn.sharedInstance().signIn()
-        // Do any additional setup after loading the view.
+        
+//        GIDSignIn.sharedInstance().signIn()
+        
+        if Auth.auth().currentUser?.uid != nil {
+                       appDelegate.loginUserID = Auth.auth().currentUser?.uid as! String
+                           self.performSegue(withIdentifier: "Home", sender: nil)
+                         }
+   
+        
     }
     
    
 
+
     
     @IBAction func LoginBtn(_ sender: Any) {
         
+        if Email.text == "" || Password.text == "" {
+            
+            GIDSignIn.sharedInstance()?.signIn()
+             UserDefaults.standard.set(true, forKey: "ISUSERLOGGEDIN")
+            UserDefaults.standard.synchronize()
+//              let alert = UIAlertController(title: "Oops", message: "Kindly login through google sign in", preferredStyle: .alert)
+//                                           let restartAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
+//                                           alert.addAction(restartAction)
+//                                           present(alert, animated: true, completion: nil)
+            
+            
+        }
+        else {
         Auth.auth().signIn(withEmail: Email.text!, password: Password.text!) { (user, error) in
             if error != nil {
-                print("Error")
+              
+                           GIDSignIn.sharedInstance()?.signIn()
+                            UserDefaults.standard.set(true, forKey: "ISUSERLOGGEDIN")
+                           UserDefaults.standard.synchronize()
             }
             
              UserDefaults.standard.set(true, forKey: "ISUSERLOGGEDIN")
@@ -80,6 +106,7 @@ class LogIn: UIViewController,GIDSignInDelegate {
             
              appDelegate.loginUserID = user?.user.uid ?? ""
             self.performSegue(withIdentifier: "Home", sender: nil)
+        }
         }
     }
     @IBOutlet weak var Login: UIButton!

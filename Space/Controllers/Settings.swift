@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import GoogleMobileAds
+import GoogleSignIn
 
 class Settings: UIViewController,GADBannerViewDelegate, GADInterstitialDelegate {
     
@@ -46,14 +47,22 @@ class Settings: UIViewController,GADBannerViewDelegate, GADInterstitialDelegate 
        }
     @IBAction func LogOut(_ sender: Any) {
         
-        if interstitial.isReady {
-          interstitial.present(fromRootViewController: self)
-        }
+        GIDSignIn.sharedInstance().signOut()
+       
             
         try! Auth.auth().signOut()
 
+        UserDefaults.standard.set(false, forKey: "ISUSERLOGGEDIN")
+                  UserDefaults.standard.synchronize()
+        
         if let storyboard = self.storyboard {
+            
             self.performSegue(withIdentifier: "BackLogin", sender: self)
+            
+                   if interstitial.isReady {
+                     interstitial.present(fromRootViewController: self)
+                   }
+            
                 }
         
         

@@ -26,17 +26,14 @@ class Video: UICollectionViewController,UIImagePickerControllerDelegate,UINaviga
      var interstitial: GADInterstitial!
     
     @IBAction func addVideo(_ sender: Any) {
-        
-        if interstitial.isReady {
-          interstitial.present(fromRootViewController: self)
-        }
-        
+      
         let picker =  UIImagePickerController()
             picker.delegate = self
             picker.allowsEditing = false
         picker.mediaTypes = [kUTTypeMovie as String]
         
             present(picker, animated: true, completion: nil)
+      
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -91,6 +88,11 @@ class Video: UICollectionViewController,UIImagePickerControllerDelegate,UINaviga
                                             //To get Url
                                             let childUpdate = ["/\(key ?? "")":video]
                                             self.ref.updateChildValues(childUpdate)
+                                            
+                                            
+                                            if self.interstitial.isReady {
+                                                self.interstitial.present(fromRootViewController: self)
+                                                   }
                                             
                                             self.collectionView.reloadData()
                                             

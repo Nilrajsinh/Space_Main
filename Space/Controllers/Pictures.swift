@@ -57,9 +57,7 @@ class Pictures: UICollectionViewController,UIImagePickerControllerDelegate,UINav
     @IBOutlet weak var AddbtnOut: UIBarButtonItem!
     
     @IBAction func AddBtn(_ sender: Any) {
-        if interstitial.isReady {
-          interstitial.present(fromRootViewController: self)
-        }
+       
         
         let picker =  UIImagePickerController()
         picker.delegate = self
@@ -67,6 +65,7 @@ class Pictures: UICollectionViewController,UIImagePickerControllerDelegate,UINav
         picker.sourceType = .photoLibrary
     
         present(picker, animated: true, completion: nil)
+       
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {

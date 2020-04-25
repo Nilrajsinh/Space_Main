@@ -35,26 +35,45 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                         </textField>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DdV-Da-vRi">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DdV-Da-vRi" customClass="RoundButton" customModule="Space" customModuleProvider="target">
                                             <rect key="frame" x="101" y="428" width="216" height="52"/>
                                             <color key="backgroundColor" red="0.79290502012410291" green="0.83177137873076157" blue="1" alpha="0.37037649990977983" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="52" id="OHh-LM-S65"/>
                                             </constraints>
-                                            <state key="normal" title="LogIn"/>
+                                            <state key="normal" title="Sign In With Google">
+                                                <color key="titleColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </state>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <real key="value" value="20"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
                                             <connections>
                                                 <action selector="LoginBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Bnf-gK-ZXh"/>
                                             </connections>
                                         </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Just Click On sign in with google button .." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CQv-Ig-iDT">
+                                            <rect key="frame" x="10" y="553" width="396" height="41"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="41" id="vxX-4u-zYX"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                            <color key="textColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="CQv-Ig-iDT" firstAttribute="top" secondItem="DdV-Da-vRi" secondAttribute="bottom" constant="73" id="6e8-6i-9HP"/>
                                         <constraint firstItem="tx7-Vq-Vaf" firstAttribute="leading" secondItem="J8x-z9-pv1" secondAttribute="leading" constant="10" id="GVw-bf-YvG"/>
                                         <constraint firstItem="DdV-Da-vRi" firstAttribute="top" secondItem="wbc-PZ-bSJ" secondAttribute="bottom" constant="39" id="Rtj-Ex-EhW"/>
                                         <constraint firstItem="tx7-Vq-Vaf" firstAttribute="top" secondItem="J8x-z9-pv1" secondAttribute="top" constant="305" id="bzc-WE-Aou"/>
                                         <constraint firstItem="wbc-PZ-bSJ" firstAttribute="leading" secondItem="J8x-z9-pv1" secondAttribute="leading" constant="10" id="cgZ-Kc-mTZ"/>
+                                        <constraint firstItem="CQv-Ig-iDT" firstAttribute="trailing" secondItem="J8x-z9-pv1" secondAttribute="trailingMargin" id="cvp-TE-n8c"/>
                                         <constraint firstAttribute="trailing" secondItem="DdV-Da-vRi" secondAttribute="trailing" constant="97" id="nuq-U4-cME"/>
                                         <constraint firstAttribute="trailing" secondItem="wbc-PZ-bSJ" secondAttribute="trailing" constant="6" id="pb3-w8-0So"/>
                                         <constraint firstAttribute="trailing" secondItem="tx7-Vq-Vaf" secondAttribute="trailing" constant="6" id="rDs-5a-RgY"/>
+                                        <constraint firstItem="CQv-Ig-iDT" firstAttribute="leading" secondItem="wbc-PZ-bSJ" secondAttribute="leading" id="tR7-FO-4z4"/>
                                         <constraint firstItem="DdV-Da-vRi" firstAttribute="leading" secondItem="J8x-z9-pv1" secondAttribute="leading" constant="101" id="uBW-cW-sL2"/>
                                         <constraint firstItem="wbc-PZ-bSJ" firstAttribute="top" secondItem="tx7-Vq-Vaf" secondAttribute="bottom" constant="16" id="zOk-Y3-quX"/>
                                     </constraints>
