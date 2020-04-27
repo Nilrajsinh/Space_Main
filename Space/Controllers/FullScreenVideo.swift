@@ -10,6 +10,7 @@ import UIKit
 import AVFoundation
 import AVKit
 import GoogleMobileAds
+import Photos
 
 class FullScreenVideo: UIViewController,GADInterstitialDelegate {
     
@@ -51,19 +52,7 @@ class FullScreenVideo: UIViewController,GADInterstitialDelegate {
              interstitial = createAndLoadInterstitial()
              interstitial.delegate = self
         
-        
-        
-        
-//        let vidUrl = URL(string: url)
-//
-//              let avplayer = AVPlayer(url: vidUrl as! URL )
-//
-//
-//              Player.PlayerLayer.player = avplayer
-//
-//              Player.player?.play()
-        
-        
+ 
         // Do any additional setup after loading the view.
     }
   
@@ -76,6 +65,7 @@ class FullScreenVideo: UIViewController,GADInterstitialDelegate {
       
         
          let vidUrl = URL(string: url)
+        
         
         let avplayer = AVPlayer(url: vidUrl as! URL )
         
@@ -91,19 +81,69 @@ class FullScreenVideo: UIViewController,GADInterstitialDelegate {
         
     }
     
+    
+    
+    @IBAction func SaveBtn(_ sender: Any) {
+        let videoImageUrl = url
+
+        DispatchQueue.global(qos: .background).async {
+            if let urls = URL(string: self.url),
+                let urlData = NSData(contentsOf: urls) {
+                let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0];
+                let filePath="\(documentsPath)/tempFile.mp4"
+                DispatchQueue.main.async {
+                    self.showToast(message: "Saved", font: .systemFont(ofSize: 20))
+                    
+                    urlData.write(toFile: filePath, atomically: true)
+                    PHPhotoLibrary.shared().performChanges({
+                        PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: URL(fileURLWithPath: filePath))
+                    }) { completed, error in
+                        if completed {
+                            
+                           
+                            print("Video is saved!")
+                            
+                            
+                        }
+                    }
+                }
+            }
+        }
+        
+    }
+    func showToast(message : String, font: UIFont) {
+
+        let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 75, y: self.view.frame.size.height-100, width: 150, height: 35))
+        toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        toastLabel.textColor = UIColor.white
+        toastLabel.font = font
+        toastLabel.textAlignment = .center;
+        toastLabel.text = message
+        toastLabel.alpha = 1.0
+        toastLabel.layer.cornerRadius = 10;
+        toastLabel.clipsToBounds  =  true
+        self.view.addSubview(toastLabel)
+        UIView.animate(withDuration: 4.0, delay: 0.1, options: .curveEaseOut, animations: {
+             toastLabel.alpha = 0.0
+        }, completion: {(isCompleted) in
+            toastLabel.removeFromSuperview()
+        })
+    }
    
     
     @IBAction func Share(_ sender: Any) {
-           
-      
         
-        let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+           let urls = URL(string: self.url)
+         let urlData = NSData(contentsOf: urls!)
+        
+        
+        let activityVC = UIActivityViewController(activityItems: [URL(string: url)], applicationActivities: nil)
                         activityVC.popoverPresentationController?.sourceView = self.view
                         present(activityVC ,animated : true ,completion : nil)
         if interstitial.isReady {
                    interstitial.present(fromRootViewController: self)
                  }
-           
+
        }
     
     
