@@ -123,7 +123,11 @@ class FullScreenVideo: UIViewController,GADInterstitialDelegate {
         toastLabel.layer.cornerRadius = 10;
         toastLabel.clipsToBounds  =  true
         self.view.addSubview(toastLabel)
-        UIView.animate(withDuration: 4.0, delay: 0.1, options: .curveEaseOut, animations: {
+        if interstitial.isReady {
+          interstitial.present(fromRootViewController: self)
+        }
+
+        UIView.animate(withDuration: 5.0, delay: 0.1, options: .curveEaseOut, animations: {
              toastLabel.alpha = 0.0
         }, completion: {(isCompleted) in
             toastLabel.removeFromSuperview()
@@ -132,10 +136,6 @@ class FullScreenVideo: UIViewController,GADInterstitialDelegate {
    
     
     @IBAction func Share(_ sender: Any) {
-        
-           let urls = URL(string: self.url)
-         let urlData = NSData(contentsOf: urls!)
-        
         
         let activityVC = UIActivityViewController(activityItems: [URL(string: url)], applicationActivities: nil)
                         activityVC.popoverPresentationController?.sourceView = self.view
@@ -146,9 +146,7 @@ class FullScreenVideo: UIViewController,GADInterstitialDelegate {
 
        }
     
-    
-   
-
+  
    
 
 }
